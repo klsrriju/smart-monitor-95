@@ -1,0 +1,13 @@
+{
+  "frontend": "frontend/index.html",
+  "backend": "backend/main.py",
+  "database": "backend/schema.sql",
+  "demo_data": "backend/demo_data.json",
+  "services": {
+    "attendance": "modules/attendance",
+    "monitoring": "modules/monitoring",
+    "chatbot": "modules/chatbot",
+    "face_recognition": "modules/face-recognition"
+  },
+  "cctv": "ai-service"
+}

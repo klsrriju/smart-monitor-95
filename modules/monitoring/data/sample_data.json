@@ -1,0 +1,34 @@
+{
+  "projects": [
+    {
+      "id": "PS-26095",
+      "name": "Community Skills Centre",
+      "district": "Chennai",
+      "organization": "Sample Welfare Trust"
+    },
+    {
+      "id": "PS-26096",
+      "name": "Rural Learning Hub",
+      "district": "Kanchipuram",
+      "organization": "Sample Education NGO"
+    }
+  ],
+  "metrics": [
+    {
+      "project_id": "PS-26095",
+      "attendance_pct": 62,
+      "capacity": 25,
+      "people_detected": 31,
+      "fund_utilization_pct": 80,
+      "physical_progress_pct": 55
+    },
+    {
+      "project_id": "PS-26096",
+      "attendance_pct": 91,
+      "capacity": 40,
+      "people_detected": 35,
+      "fund_utilization_pct": 52,
+      "physical_progress_pct": 60
+    }
+  ]
+}

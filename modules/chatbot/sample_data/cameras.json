@@ -1,0 +1,34 @@
+[
+  {
+    "camera_id": "CAM-001",
+    "project_id": "PRJ-001",
+    "location": "Chennai",
+    "status": "ONLINE",
+    "max_capacity": 20,
+    "offline_reason": ""
+  },
+  {
+    "camera_id": "CAM-002",
+    "project_id": "PRJ-002",
+    "location": "Madurai",
+    "status": "ONLINE",
+    "max_capacity": 25,
+    "offline_reason": ""
+  },
+  {
+    "camera_id": "CAM-003",
+    "project_id": "PRJ-003",
+    "location": "Coimbatore",
+    "status": "ONLINE",
+    "max_capacity": 15,
+    "offline_reason": ""
+  },
+  {
+    "camera_id": "CAM-004",
+    "project_id": "PRJ-004",
+    "location": "Tiruchirappalli",
+    "status": "OFFLINE",
+    "max_capacity": 30,
+    "offline_reason": "Network connection lost."
+  }
+]

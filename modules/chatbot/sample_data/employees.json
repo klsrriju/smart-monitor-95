@@ -1,0 +1,32 @@
+[
+  {
+    "employee_id": "USR-INS-001",
+    "name": "Arvind R.",
+    "department": "DoSJE"
+  },
+  {
+    "employee_id": "USR-INS-002",
+    "name": "Meena K.",
+    "department": "DoSJE"
+  },
+  {
+    "employee_id": "USR-INS-003",
+    "name": "Karthik S.",
+    "department": "DoSJE"
+  },
+  {
+    "employee_id": "USR-NGO-001",
+    "name": "Ramesh S.",
+    "department": "NGO"
+  },
+  {
+    "employee_id": "USR-NGO-002",
+    "name": "Kalaivani S.",
+    "department": "NGO"
+  },
+  {
+    "employee_id": "USR-NGO-003",
+    "name": "Priya M.",
+    "department": "NGO"
+  }
+]

@@ -1,0 +1,1190 @@
+{
+  "users": [
+    {
+      "id": "USR-ADM-001",
+      "name": "Admin Master",
+      "email": "admin@dosje.gov.in",
+      "role": "admin",
+      "department": "DoSJE",
+      "status": "Active"
+    },
+    {
+      "id": "USR-INS-001",
+      "name": "Arvind R.",
+      "email": "arvind.r@pmu.gov.in",
+      "role": "inspector",
+      "department": "DoSJE",
+      "status": "Active"
+    },
+    {
+      "id": "USR-INS-002",
+      "name": "Meena K.",
+      "email": "meena.k@pmu.gov.in",
+      "role": "inspector",
+      "department": "DoSJE",
+      "status": "On Leave"
+    },
+    {
+      "id": "USR-INS-003",
+      "name": "Karthik S.",
+      "email": "karthik.s@pmu.gov.in",
+      "role": "inspector",
+      "department": "DoSJE",
+      "status": "Active"
+    },
+    {
+      "id": "USR-NGO-001",
+      "name": "Ramesh S.",
+      "email": "ramesh.s@ngo.org",
+      "role": "user",
+      "department": "NGO",
+      "status": "Active"
+    },
+    {
+      "id": "USR-NGO-002",
+      "name": "Kalaivani S.",
+      "email": "kalaivani.s@ngo.org",
+      "role": "user",
+      "department": "NGO",
+      "status": "Pending Review"
+    },
+    {
+      "id": "USR-NGO-003",
+      "name": "Priya M.",
+      "email": "priya.m@ngo.org",
+      "role": "user",
+      "department": "NGO",
+      "status": "Inactive"
+    }
+  ],
+  "inspectors": [
+    {
+      "id": "INSP-001",
+      "user_id": "USR-INS-001",
+      "department": "DoSJE",
+      "availability": true,
+      "users": {
+        "name": "Arvind R.",
+        "email": "arvind.r@pmu.gov.in"
+      }
+    },
+    {
+      "id": "INSP-002",
+      "user_id": "USR-INS-002",
+      "department": "DoSJE",
+      "availability": true,
+      "users": {
+        "name": "Meena K.",
+        "email": "meena.k@pmu.gov.in"
+      }
+    },
+    {
+      "id": "INSP-003",
+      "user_id": "USR-INS-003",
+      "department": "DoSJE",
+      "availability": true,
+      "users": {
+        "name": "Karthik S.",
+        "email": "karthik.s@pmu.gov.in"
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "PRJ-001",
+      "name": "Chennai Community Support Centre",
+      "organization": "Helping Hands Foundation",
+      "scheme": "Smart Support Scheme",
+      "address": "Perambur, Chennai",
+      "district": "Chennai",
+      "beneficiary_count": 520,
+      "staff_count": 42,
+      "status": "Completed",
+      "risk_score": 22,
+      "owner_user_id": "USR-NGO-001",
+      "created_at": "2026-08-19T10:15:00+00:00",
+      "progress_percent": 100,
+      "location": "Perambur, Chennai",
+      "incharge": "Helping Hands Foundation"
+    },
+    {
+      "id": "PRJ-002",
+      "name": "Madurai Women Support Hub",
+      "organization": "Sakthi Social Trust",
+      "scheme": "Women Empowerment Scheme",
+      "address": "Anna Nagar, Madurai",
+      "district": "Madurai",
+      "beneficiary_count": 410,
+      "staff_count": 35,
+      "status": "On Track",
+      "risk_score": 48,
+      "owner_user_id": "USR-NGO-002",
+      "created_at": "2026-08-26T11:00:00+00:00",
+      "progress_percent": 72,
+      "location": "Anna Nagar, Madurai",
+      "incharge": "Sakthi Social Trust"
+    },
+    {
+      "id": "PRJ-003",
+      "name": "Coimbatore Skill Development Centre",
+      "organization": "Uplift Tamil Nadu",
+      "scheme": "Skill Development Scheme",
+      "address": "Gandhipuram, Coimbatore",
+      "district": "Coimbatore",
+      "beneficiary_count": 680,
+      "staff_count": 58,
+      "status": "Needs Review",
+      "risk_score": 31,
+      "owner_user_id": "USR-NGO-003",
+      "created_at": "2026-09-01T09:30:00+00:00",
+      "progress_percent": 55,
+      "location": "Gandhipuram, Coimbatore",
+      "incharge": "Uplift Tamil Nadu"
+    },
+    {
+      "id": "PRJ-004",
+      "name": "Tiruchirappalli Senior Care Centre",
+      "organization": "CareBridge NGO",
+      "scheme": "Senior Citizen Support Scheme",
+      "address": "Srirangam, Tiruchirappalli",
+      "district": "Tiruchirappalli",
+      "beneficiary_count": 290,
+      "staff_count": 24,
+      "status": "Pending Inspection",
+      "risk_score": 67,
+      "owner_user_id": "USR-NGO-001",
+      "created_at": "2026-09-05T10:00:00+00:00",
+      "progress_percent": 40,
+      "location": "Srirangam, Tiruchirappalli",
+      "incharge": "CareBridge NGO"
+    },
+    {
+      "id": "PRJ-005",
+      "name": "Salem Rehabilitation Centre",
+      "organization": "Namma Seva Trust",
+      "scheme": "Rehabilitation Support Scheme",
+      "address": "Fairlands, Salem",
+      "district": "Salem",
+      "beneficiary_count": 360,
+      "staff_count": 29,
+      "status": "Delayed",
+      "risk_score": 74,
+      "owner_user_id": "USR-NGO-002",
+      "created_at": "2026-09-09T09:00:00+00:00",
+      "progress_percent": 30,
+      "location": "Fairlands, Salem",
+      "incharge": "Namma Seva Trust"
+    },
+    {
+      "id": "PRJ-006",
+      "name": "Chengalpattu Youth Resource Hub",
+      "organization": "FutureSteps Foundation",
+      "scheme": "Youth Support Scheme",
+      "address": "GST Road, Chengalpattu",
+      "district": "Chengalpattu",
+      "beneficiary_count": 450,
+      "staff_count": 38,
+      "status": "In Progress",
+      "risk_score": 39,
+      "owner_user_id": "USR-NGO-003",
+      "created_at": "2026-09-14T10:30:00+00:00",
+      "progress_percent": 50,
+      "location": "GST Road, Chengalpattu",
+      "incharge": "FutureSteps Foundation"
+    }
+  ],
+  "assignments": [
+    {
+      "id": "ASN-001",
+      "project_id": "PRJ-001",
+      "inspector_id": "INSP-001",
+      "project_name": "Chennai Community Support Centre",
+      "inspector_name": "Arvind R.",
+      "status": "completed",
+      "assigned_at": "2026-08-24T09:00:00+00:00",
+      "started_at": "2026-08-27T09:00:00+00:00",
+      "completed_at": "2026-08-27T13:00:00+00:00",
+      "score": 91
+    },
+    {
+      "id": "ASN-002",
+      "project_id": "PRJ-002",
+      "inspector_id": "INSP-002",
+      "project_name": "Madurai Women Support Hub",
+      "inspector_name": "Meena K.",
+      "status": "pending",
+      "assigned_at": "2026-09-08T09:00:00+00:00",
+      "started_at": "2026-09-22T10:00:00+00:00",
+      "completed_at": null,
+      "score": 72
+    },
+    {
+      "id": "ASN-003",
+      "project_id": "PRJ-003",
+      "inspector_id": "INSP-003",
+      "project_name": "Coimbatore Skill Development Centre",
+      "inspector_name": "Karthik S.",
+      "status": "pending",
+      "assigned_at": "2026-09-15T09:00:00+00:00",
+      "started_at": null,
+      "completed_at": null,
+      "score": null
+    },
+    {
+      "id": "ASN-004",
+      "project_id": "PRJ-004",
+      "inspector_id": "INSP-001",
+      "project_name": "Tiruchirappalli Senior Care Centre",
+      "inspector_name": "Arvind R.",
+      "status": "pending",
+      "assigned_at": "2026-09-18T09:00:00+00:00",
+      "started_at": null,
+      "completed_at": null,
+      "score": null
+    },
+    {
+      "id": "ASN-005",
+      "project_id": "PRJ-005",
+      "inspector_id": "INSP-002",
+      "project_name": "Salem Rehabilitation Centre",
+      "inspector_name": "Meena K.",
+      "status": "pending",
+      "assigned_at": "2026-09-19T09:00:00+00:00",
+      "started_at": null,
+      "completed_at": null,
+      "score": null
+    },
+    {
+      "id": "ASN-006",
+      "project_id": "PRJ-006",
+      "inspector_id": "INSP-003",
+      "project_name": "Chengalpattu Youth Resource Hub",
+      "inspector_name": "Karthik S.",
+      "status": "pending",
+      "assigned_at": "2026-09-11T09:00:00+00:00",
+      "started_at": "2026-09-16T09:00:00+00:00",
+      "completed_at": "2026-09-16T12:00:00+00:00",
+      "score": 84
+    }
+  ],
+  "inspections": [
+    {
+      "id": "INS-001",
+      "project_id": "PRJ-001",
+      "project": "Chennai Community Support Centre",
+      "inspector_id": "INSP-001",
+      "inspector_name": "Arvind R.",
+      "status": "completed",
+      "overall_score": 91,
+      "remarks": "Site records, beneficiary attendance and evidence verified.",
+      "started_at": "2026-08-27T09:00:00+00:00",
+      "completed_at": "2026-08-27T13:00:00+00:00",
+      "address": "Perambur, Chennai"
+    },
+    {
+      "id": "INS-002",
+      "project_id": "PRJ-002",
+      "project": "Madurai Women Support Hub",
+      "inspector_id": "INSP-002",
+      "inspector_name": "Meena K.",
+      "status": "pending",
+      "overall_score": 72,
+      "remarks": "Attendance discrepancy requires supporting explanation.",
+      "started_at": "2026-09-22T10:00:00+00:00",
+      "completed_at": null,
+      "address": "Anna Nagar, Madurai"
+    },
+    {
+      "id": "INS-003",
+      "project_id": "PRJ-003",
+      "project": "Coimbatore Skill Development Centre",
+      "inspector_id": "INSP-003",
+      "inspector_name": "Karthik S.",
+      "status": "pending",
+      "overall_score": null,
+      "remarks": "Inspection scheduled.",
+      "started_at": null,
+      "completed_at": null,
+      "address": "Gandhipuram, Coimbatore"
+    },
+    {
+      "id": "INS-004",
+      "project_id": "PRJ-004",
+      "project": "Tiruchirappalli Senior Care Centre",
+      "inspector_id": "INSP-001",
+      "inspector_name": "Arvind R.",
+      "status": "pending",
+      "overall_score": null,
+      "remarks": "Pending field inspection.",
+      "started_at": null,
+      "completed_at": null,
+      "address": "Srirangam, Tiruchirappalli"
+    },
+    {
+      "id": "INS-005",
+      "project_id": "PRJ-005",
+      "project": "Salem Rehabilitation Centre",
+      "inspector_id": "INSP-002",
+      "inspector_name": "Meena K.",
+      "status": "pending",
+      "overall_score": null,
+      "remarks": "High-risk project requires priority inspection.",
+      "started_at": null,
+      "completed_at": null,
+      "address": "Fairlands, Salem"
+    },
+    {
+      "id": "INS-006",
+      "project_id": "PRJ-001",
+      "project": "Chennai Community Support Centre",
+      "inspector_id": "INSP-001",
+      "inspector_name": "Arvind R.",
+      "status": "completed",
+      "overall_score": 88,
+      "remarks": "Compliance evidence verified.",
+      "started_at": "2026-09-16T09:00:00+00:00",
+      "completed_at": "2026-09-16T12:00:00+00:00",
+      "address": "GST Road, Chengalpattu"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "ATT-001",
+      "project_id": "PRJ-001",
+      "reported_count": 489,
+      "observed_count": 489,
+      "recorded_at": "2026-09-23T09:00:00+00:00",
+      "registered_count": 520,
+      "present": 489,
+      "status": "Compliant"
+    },
+    {
+      "id": "ATT-002",
+      "project_id": "PRJ-002",
+      "reported_count": 332,
+      "observed_count": 328,
+      "recorded_at": "2026-09-23T09:00:00+00:00",
+      "registered_count": 410,
+      "present": 332,
+      "status": "Attention Required"
+    },
+    {
+      "id": "ATT-003",
+      "project_id": "PRJ-003",
+      "reported_count": 619,
+      "observed_count": 619,
+      "recorded_at": "2026-09-23T09:00:00+00:00",
+      "registered_count": 680,
+      "present": 619,
+      "status": "Compliant"
+    },
+    {
+      "id": "ATT-004",
+      "project_id": "PRJ-004",
+      "reported_count": 212,
+      "observed_count": 212,
+      "recorded_at": "2026-09-23T09:00:00+00:00",
+      "registered_count": 290,
+      "present": 212,
+      "status": "Attention Required"
+    },
+    {
+      "id": "ATT-005",
+      "project_id": "PRJ-005",
+      "reported_count": 245,
+      "observed_count": 241,
+      "recorded_at": "2026-09-23T09:00:00+00:00",
+      "registered_count": 360,
+      "present": 245,
+      "status": "Attention Required"
+    },
+    {
+      "id": "ATT-006",
+      "project_id": "PRJ-006",
+      "reported_count": 400,
+      "observed_count": 400,
+      "recorded_at": "2026-09-23T09:00:00+00:00",
+      "registered_count": 450,
+      "present": 400,
+      "status": "Compliant"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "ANM-001",
+      "project_id": "PRJ-002",
+      "type": "Attendance discrepancy",
+      "anomaly_type": "ATTENDANCE",
+      "severity": "MEDIUM",
+      "description": "Observed attendance is below reported attendance for the current reporting period.",
+      "detected_at": "2026-09-22T10:00:00+00:00",
+      "resolution_status": "open",
+      "status": "OPEN"
+    },
+    {
+      "id": "ANM-002",
+      "project_id": "PRJ-004",
+      "type": "Inspection overdue",
+      "anomaly_type": "INSPECTION",
+      "severity": "HIGH",
+      "description": "Scheduled field inspection has not yet been completed.",
+      "detected_at": "2026-09-21T12:00:00+00:00",
+      "resolution_status": "open",
+      "status": "OPEN"
+    },
+    {
+      "id": "ANM-003",
+      "project_id": "PRJ-005",
+      "type": "Fund utilization anomaly",
+      "anomaly_type": "FINANCIAL",
+      "severity": "HIGH",
+      "description": "Utilization exceeds 89% of allocation before the reporting period close.",
+      "detected_at": "2026-09-20T11:00:00+00:00",
+      "resolution_status": "open",
+      "status": "OPEN"
+    },
+    {
+      "id": "ANM-004",
+      "project_id": "PRJ-002",
+      "type": "High CCTV occupancy",
+      "anomaly_type": "OCCUPANCY",
+      "severity": "MEDIUM",
+      "description": "Project-area occupancy reached 88% of configured capacity.",
+      "detected_at": "2026-09-23T08:00:00+00:00",
+      "resolution_status": "open",
+      "status": "OPEN"
+    },
+    {
+      "id": "ANM-005",
+      "project_id": "PRJ-003",
+      "type": "Evidence review pending",
+      "anomaly_type": "EVIDENCE",
+      "severity": "LOW",
+      "description": "One inspection evidence item is awaiting verification.",
+      "detected_at": "2026-09-19T14:00:00+00:00",
+      "resolution_status": "resolved",
+      "status": "RESOLVED",
+      "resolved_at": "2026-09-21T15:00:00+00:00"
+    },
+    {
+      "id": "ANM-006",
+      "project_id": "PRJ-006",
+      "type": "Routine compliance alert",
+      "anomaly_type": "COMPLIANCE",
+      "severity": "LOW",
+      "description": "Routine document refresh is due this month.",
+      "detected_at": "2026-09-18T10:00:00+00:00",
+      "resolution_status": "acknowledged",
+      "status": "ACKNOWLEDGED"
+    }
+  ],
+  "documents": [
+    {
+      "id": "DOC-001",
+      "project_id": "PRJ-001",
+      "project_name": "Chennai Community Support Centre",
+      "uploaded_by": "USR-NGO-001",
+      "uploader_name": "Ramesh S.",
+      "document_name": "Utilization_Certificate_Chennai.pdf",
+      "document_type": "Utilization Certificate",
+      "status": "Verified",
+      "uploaded_at": "2026-09-19T11:00:00+00:00",
+      "file_url": "",
+      "remarks": "Figures reconcile with ledger."
+    },
+    {
+      "id": "DOC-002",
+      "project_id": "PRJ-002",
+      "project_name": "Madurai Women Support Hub",
+      "uploaded_by": "USR-NGO-002",
+      "uploader_name": "Kalaivani S.",
+      "document_name": "Beneficiary_List_Madurai.xlsx",
+      "document_type": "Beneficiary List",
+      "status": "Pending",
+      "uploaded_at": "2026-09-20T10:00:00+00:00",
+      "file_url": ""
+    },
+    {
+      "id": "DOC-003",
+      "project_id": "PRJ-003",
+      "project_name": "Coimbatore Skill Development Centre",
+      "uploaded_by": "USR-NGO-003",
+      "uploader_name": "Priya M.",
+      "document_name": "Site_Photos_Coimbatore.zip",
+      "document_type": "Site Photographs",
+      "status": "Verified",
+      "uploaded_at": "2026-09-18T14:00:00+00:00",
+      "file_url": ""
+    },
+    {
+      "id": "DOC-004",
+      "project_id": "PRJ-004",
+      "project_name": "Tiruchirappalli Senior Care Centre",
+      "uploaded_by": "USR-NGO-001",
+      "uploader_name": "Ramesh S.",
+      "document_name": "Inspection_Preparation.pdf",
+      "document_type": "Inspection Document",
+      "status": "Pending",
+      "uploaded_at": "2026-09-21T09:00:00+00:00",
+      "file_url": ""
+    },
+    {
+      "id": "DOC-005",
+      "project_id": "PRJ-005",
+      "project_name": "Salem Rehabilitation Centre",
+      "uploaded_by": "USR-NGO-002",
+      "uploader_name": "Kalaivani S.",
+      "document_name": "Fund_Statement_Salem.pdf",
+      "document_type": "Financial Statement",
+      "status": "Pending",
+      "uploaded_at": "2026-09-22T16:00:00+00:00",
+      "file_url": ""
+    },
+    {
+      "id": "DOC-006",
+      "project_id": "PRJ-006",
+      "project_name": "Chengalpattu Youth Resource Hub",
+      "uploaded_by": "USR-NGO-003",
+      "uploader_name": "Priya M.",
+      "document_name": "Compliance_Report_Sep.pdf",
+      "document_type": "Compliance Report",
+      "status": "Verified",
+      "uploaded_at": "2026-09-21T13:00:00+00:00",
+      "file_url": ""
+    },
+    {
+      "id": "DOC-100",
+      "project_id": "PRJ-001",
+      "project_name": "Chennai Community Support Centre",
+      "uploaded_by": "USR-NGO-001",
+      "uploader_name": "Ramesh S.",
+      "document_name": "Progress_Report_PRJ-001_Sep2026.pdf",
+      "document_type": "Progress Report",
+      "status": "Verified",
+      "uploaded_at": "2026-09-13T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-101",
+      "project_id": "PRJ-001",
+      "project_name": "Chennai Community Support Centre",
+      "uploaded_by": "USR-NGO-001",
+      "uploader_name": "Ramesh S.",
+      "document_name": "Attendance_Register_PRJ-001_Sep2026.xlsx",
+      "document_type": "Attendance Register",
+      "status": "Pending",
+      "uploaded_at": "2026-09-14T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-102",
+      "project_id": "PRJ-002",
+      "project_name": "Madurai Women Support Hub",
+      "uploaded_by": "USR-NGO-002",
+      "uploader_name": "Kalaivani S.",
+      "document_name": "Progress_Report_PRJ-002_Sep2026.pdf",
+      "document_type": "Progress Report",
+      "status": "Verified",
+      "uploaded_at": "2026-09-13T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-103",
+      "project_id": "PRJ-002",
+      "project_name": "Madurai Women Support Hub",
+      "uploaded_by": "USR-NGO-002",
+      "uploader_name": "Kalaivani S.",
+      "document_name": "Attendance_Register_PRJ-002_Sep2026.xlsx",
+      "document_type": "Attendance Register",
+      "status": "Pending",
+      "uploaded_at": "2026-09-14T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-104",
+      "project_id": "PRJ-003",
+      "project_name": "Coimbatore Skill Development Centre",
+      "uploaded_by": "USR-NGO-003",
+      "uploader_name": "Priya M.",
+      "document_name": "Progress_Report_PRJ-003_Sep2026.pdf",
+      "document_type": "Progress Report",
+      "status": "Verified",
+      "uploaded_at": "2026-09-13T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-105",
+      "project_id": "PRJ-003",
+      "project_name": "Coimbatore Skill Development Centre",
+      "uploaded_by": "USR-NGO-003",
+      "uploader_name": "Priya M.",
+      "document_name": "Attendance_Register_PRJ-003_Sep2026.xlsx",
+      "document_type": "Attendance Register",
+      "status": "Pending",
+      "uploaded_at": "2026-09-14T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-106",
+      "project_id": "PRJ-004",
+      "project_name": "Tiruchirappalli Senior Care Centre",
+      "uploaded_by": "USR-NGO-001",
+      "uploader_name": "Ramesh S.",
+      "document_name": "Progress_Report_PRJ-004_Sep2026.pdf",
+      "document_type": "Progress Report",
+      "status": "Verified",
+      "uploaded_at": "2026-09-13T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-107",
+      "project_id": "PRJ-004",
+      "project_name": "Tiruchirappalli Senior Care Centre",
+      "uploaded_by": "USR-NGO-001",
+      "uploader_name": "Ramesh S.",
+      "document_name": "Attendance_Register_PRJ-004_Sep2026.xlsx",
+      "document_type": "Attendance Register",
+      "status": "Pending",
+      "uploaded_at": "2026-09-14T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-108",
+      "project_id": "PRJ-005",
+      "project_name": "Salem Rehabilitation Centre",
+      "uploaded_by": "USR-NGO-002",
+      "uploader_name": "Kalaivani S.",
+      "document_name": "Progress_Report_PRJ-005_Sep2026.pdf",
+      "document_type": "Progress Report",
+      "status": "Verified",
+      "uploaded_at": "2026-09-13T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-109",
+      "project_id": "PRJ-005",
+      "project_name": "Salem Rehabilitation Centre",
+      "uploaded_by": "USR-NGO-002",
+      "uploader_name": "Kalaivani S.",
+      "document_name": "Attendance_Register_PRJ-005_Sep2026.xlsx",
+      "document_type": "Attendance Register",
+      "status": "Pending",
+      "uploaded_at": "2026-09-14T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-110",
+      "project_id": "PRJ-006",
+      "project_name": "Chengalpattu Youth Resource Hub",
+      "uploaded_by": "USR-NGO-003",
+      "uploader_name": "Priya M.",
+      "document_name": "Progress_Report_PRJ-006_Sep2026.pdf",
+      "document_type": "Progress Report",
+      "status": "Verified",
+      "uploaded_at": "2026-09-13T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    },
+    {
+      "id": "DOC-111",
+      "project_id": "PRJ-006",
+      "project_name": "Chengalpattu Youth Resource Hub",
+      "uploaded_by": "USR-NGO-003",
+      "uploader_name": "Priya M.",
+      "document_name": "Attendance_Register_PRJ-006_Sep2026.xlsx",
+      "document_type": "Attendance Register",
+      "status": "Pending",
+      "uploaded_at": "2026-09-14T10:00:00+00:00",
+      "file_url": "",
+      "remarks": "Demo record for project monitoring."
+    }
+  ],
+  "funds": [
+    {
+      "id": "FUN-001",
+      "project_id": "PRJ-001",
+      "project": "Chennai Community Support Centre",
+      "allocated_amount": 950000,
+      "utilized_amount": 610000,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-20T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-002",
+      "project_id": "PRJ-002",
+      "project": "Madurai Women Support Hub",
+      "allocated_amount": 780000,
+      "utilized_amount": 663000,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-19T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-003",
+      "project_id": "PRJ-003",
+      "project": "Coimbatore Skill Development Centre",
+      "allocated_amount": 1250000,
+      "utilized_amount": 812500,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-18T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-004",
+      "project_id": "PRJ-004",
+      "project": "Tiruchirappalli Senior Care Centre",
+      "allocated_amount": 620000,
+      "utilized_amount": 527000,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-17T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-005",
+      "project_id": "PRJ-005",
+      "project": "Salem Rehabilitation Centre",
+      "allocated_amount": 880000,
+      "utilized_amount": 783200,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-16T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-006",
+      "project_id": "PRJ-006",
+      "project": "Chengalpattu Youth Resource Hub",
+      "allocated_amount": 1020000,
+      "utilized_amount": 714000,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-15T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-100",
+      "project_id": "PRJ-001",
+      "project": "Chennai Community Support Centre",
+      "allocated_amount": 332500,
+      "utilized_amount": 152500,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-12T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-101",
+      "project_id": "PRJ-001",
+      "project": "Chennai Community Support Centre",
+      "allocated_amount": 237500,
+      "utilized_amount": 122000,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-13T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-102",
+      "project_id": "PRJ-002",
+      "project": "Madurai Women Support Hub",
+      "allocated_amount": 273000,
+      "utilized_amount": 165750,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-12T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-103",
+      "project_id": "PRJ-002",
+      "project": "Madurai Women Support Hub",
+      "allocated_amount": 195000,
+      "utilized_amount": 132600,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-13T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-104",
+      "project_id": "PRJ-003",
+      "project": "Coimbatore Skill Development Centre",
+      "allocated_amount": 437500,
+      "utilized_amount": 203125,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-12T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-105",
+      "project_id": "PRJ-003",
+      "project": "Coimbatore Skill Development Centre",
+      "allocated_amount": 312500,
+      "utilized_amount": 162500,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-13T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-106",
+      "project_id": "PRJ-004",
+      "project": "Tiruchirappalli Senior Care Centre",
+      "allocated_amount": 217000,
+      "utilized_amount": 131750,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-12T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-107",
+      "project_id": "PRJ-004",
+      "project": "Tiruchirappalli Senior Care Centre",
+      "allocated_amount": 155000,
+      "utilized_amount": 105400,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-13T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-108",
+      "project_id": "PRJ-005",
+      "project": "Salem Rehabilitation Centre",
+      "allocated_amount": 308000,
+      "utilized_amount": 195800,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-12T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-109",
+      "project_id": "PRJ-005",
+      "project": "Salem Rehabilitation Centre",
+      "allocated_amount": 220000,
+      "utilized_amount": 156640,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-13T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-110",
+      "project_id": "PRJ-006",
+      "project": "Chengalpattu Youth Resource Hub",
+      "allocated_amount": 357000,
+      "utilized_amount": 178500,
+      "financial_year": 2026,
+      "status": "submitted",
+      "recorded_at": "2026-09-12T11:00:00+00:00"
+    },
+    {
+      "id": "FUN-111",
+      "project_id": "PRJ-006",
+      "project": "Chengalpattu Youth Resource Hub",
+      "allocated_amount": 255000,
+      "utilized_amount": 142800,
+      "financial_year": 2026,
+      "status": "under_review",
+      "recorded_at": "2026-09-13T11:00:00+00:00"
+    }
+  ],
+  "cameras": [
+    {
+      "id": "CAM-001",
+      "camera_id": "CAM-001",
+      "camera_name": "Main Hall Camera",
+      "location": "Chennai",
+      "district": "Chennai",
+      "project_id": "PRJ-001",
+      "status": "ONLINE",
+      "capacity": 20,
+      "rtsp_url": "/stream?camera=CAM-001",
+      "offline_reason": "",
+      "offline_since": null
+    },
+    {
+      "id": "CAM-002",
+      "camera_id": "CAM-002",
+      "camera_name": "Project Area Camera",
+      "location": "Madurai",
+      "district": "Madurai",
+      "project_id": "PRJ-002",
+      "status": "ONLINE",
+      "capacity": 25,
+      "rtsp_url": "/stream?camera=CAM-002",
+      "offline_reason": "",
+      "offline_since": null
+    },
+    {
+      "id": "CAM-003",
+      "camera_id": "CAM-003",
+      "camera_name": "Corridor Camera",
+      "location": "Coimbatore",
+      "district": "Coimbatore",
+      "project_id": "PRJ-003",
+      "status": "ONLINE",
+      "capacity": 15,
+      "rtsp_url": "/stream?camera=CAM-003",
+      "offline_reason": "",
+      "offline_since": null
+    },
+    {
+      "id": "CAM-004",
+      "camera_id": "CAM-004",
+      "camera_name": "Entrance Camera",
+      "location": "Tiruchirappalli",
+      "district": "Tiruchirappalli",
+      "project_id": "PRJ-004",
+      "status": "OFFLINE",
+      "capacity": 30,
+      "rtsp_url": "/stream?camera=CAM-004",
+      "offline_reason": "Network connection lost.",
+      "offline_since": "2026-09-23T08:50:00+00:00"
+    }
+  ],
+  "occupancy": [
+    {
+      "id": "OCC-001",
+      "camera_id": "CAM-001",
+      "people_count": 8,
+      "occupancy_percentage": 40.0,
+      "alert_status": "NORMAL",
+      "recorded_at": "2026-09-23T08:50:00+00:00"
+    },
+    {
+      "id": "OCC-002",
+      "camera_id": "CAM-002",
+      "people_count": 22,
+      "occupancy_percentage": 88.0,
+      "alert_status": "WARNING",
+      "recorded_at": "2026-09-23T08:50:00+00:00"
+    },
+    {
+      "id": "OCC-003",
+      "camera_id": "CAM-003",
+      "people_count": 7,
+      "occupancy_percentage": 46.7,
+      "alert_status": "NORMAL",
+      "recorded_at": "2026-09-23T08:50:00+00:00"
+    },
+    {
+      "id": "OCC-004",
+      "camera_id": "CAM-004",
+      "people_count": 18,
+      "occupancy_percentage": 60.0,
+      "alert_status": "NORMAL",
+      "recorded_at": "2026-09-23T08:50:00+00:00"
+    }
+  ],
+  "feedback": [
+    {
+      "id": "FDB-002",
+      "project_id": "PRJ-002",
+      "rating": 4,
+      "created_at": "2026-09-17T09:00:00+00:00",
+      "user_id": "USR-NGO-001",
+      "user_name": "Ramesh S.",
+      "review_text": "Good field coordination."
+    },
+    {
+      "id": "FDB-003",
+      "project_id": "PRJ-003",
+      "rating": 4,
+      "created_at": "2026-09-19T09:00:00+00:00",
+      "user_id": "USR-NGO-002",
+      "user_name": "Kalaivani S.",
+      "review_text": "Evidence upload was smooth."
+    }
+  ],
+  "notifications": [
+    {
+      "id": "NTF-001",
+      "title": "Inspection pending",
+      "message": "PRJ-005 requires a priority field inspection.",
+      "type": "warning",
+      "is_read": false,
+      "created_at": "2026-09-23T08:00:00+00:00",
+      "target_role": "admin"
+    },
+    {
+      "id": "NTF-002",
+      "title": "Attendance discrepancy",
+      "message": "Observed attendance differs from the reported count at PRJ-002.",
+      "type": "alert",
+      "is_read": false,
+      "created_at": "2026-09-23T09:00:00+00:00",
+      "target_role": "inspector"
+    },
+    {
+      "id": "NTF-003",
+      "title": "Document verified",
+      "message": "Compliance Report for PRJ-006 was verified.",
+      "type": "success",
+      "is_read": true,
+      "created_at": "2026-09-22T14:00:00+00:00",
+      "target_role": "user"
+    },
+    {
+      "id": "NTF-004",
+      "title": "Fund review",
+      "message": "PRJ-005 fund utilization is under review.",
+      "type": "warning",
+      "is_read": false,
+      "created_at": "2026-09-22T15:00:00+00:00",
+      "target_role": "admin"
+    },
+    {
+      "id": "NTF-005",
+      "title": "Inspection completed",
+      "message": "PRJ-001 inspection scored 91/100.",
+      "type": "success",
+      "is_read": true,
+      "created_at": "2026-09-16T13:00:00+00:00",
+      "target_role": "admin"
+    },
+    {
+      "id": "NTF-006",
+      "title": "Evidence review pending",
+      "message": "Two documents for PRJ-004 are awaiting verification.",
+      "type": "warning",
+      "is_read": false,
+      "created_at": "2026-09-23T10:00:00+00:00",
+      "target_role": "admin"
+    },
+    {
+      "id": "NTF-007",
+      "title": "Inspection scheduled",
+      "message": "PRJ-003 field inspection is scheduled for the current week.",
+      "type": "info",
+      "is_read": false,
+      "created_at": "2026-09-22T12:00:00+00:00",
+      "target_role": "inspector"
+    },
+    {
+      "id": "NTF-008",
+      "title": "Fund update",
+      "message": "A new fund utilization record was added for PRJ-001.",
+      "type": "success",
+      "is_read": true,
+      "created_at": "2026-09-21T16:00:00+00:00",
+      "target_role": "user"
+    }
+  ],
+  "reschedules": [
+    {
+      "id": "RES-001",
+      "assignment_id": "ASN-005",
+      "project_id": "PRJ-005",
+      "project_name": "Salem Rehabilitation Centre",
+      "inspector_id": "INSP-002",
+      "inspector_name": "Meena K.",
+      "reason": "District coordination meeting conflicts with original date.",
+      "status": "Pending",
+      "requested_at": "2026-09-22T10:00:00+00:00"
+    },
+    {
+      "id": "RES-002",
+      "assignment_id": "ASN-003",
+      "project_id": "PRJ-003",
+      "project_name": "Coimbatore Skill Development Centre",
+      "inspector_id": "INSP-003",
+      "inspector_name": "Karthik S.",
+      "reason": "Training workshop overlaps with scheduled visit.",
+      "status": "Pending",
+      "requested_at": "2026-09-20T11:30:00+00:00"
+    },
+    {
+      "id": "RES-003",
+      "assignment_id": "ASN-004",
+      "project_id": "PRJ-004",
+      "project_name": "Tiruchirappalli Senior Care Centre",
+      "inspector_id": "INSP-001",
+      "inspector_name": "Arvind R.",
+      "reason": "Beneficiary event requires the inspection to move by one day.",
+      "status": "Approved",
+      "requested_at": "2026-09-19T15:00:00+00:00"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALT-OCCUPANCY-CAM-002",
+      "type": "OCCUPANCY",
+      "category": "CAMERA",
+      "severity": "MEDIUM",
+      "project_id": "PRJ-002",
+      "camera_id": "CAM-002",
+      "inspector_id": "INSP-002",
+      "status": "OPEN",
+      "created_at": "2026-09-23T08:50:00+00:00"
+    },
+    {
+      "id": "ALT-CAMERA-CAM-004",
+      "type": "CAMERA_OFFLINE",
+      "category": "CAMERA",
+      "severity": "HIGH",
+      "project_id": "PRJ-004",
+      "camera_id": "CAM-004",
+      "inspector_id": "INSP-001",
+      "status": "OPEN",
+      "created_at": "2026-09-23T08:50:00+00:00"
+    },
+    {
+      "id": "ALT-INSPECTION-INS-002",
+      "type": "INSPECTION_PENDING",
+      "category": "INSPECTION",
+      "severity": "MEDIUM",
+      "project_id": "PRJ-002",
+      "camera_id": null,
+      "inspector_id": "INSP-002",
+      "status": "OPEN",
+      "created_at": "2026-09-22T10:00:00+00:00"
+    },
+    {
+      "id": "ALT-INSPECTION-INS-003",
+      "type": "INSPECTION_PENDING",
+      "category": "INSPECTION",
+      "severity": "MEDIUM",
+      "project_id": "PRJ-003",
+      "camera_id": null,
+      "inspector_id": "INSP-003",
+      "status": "OPEN",
+      "created_at": "2026-09-24T00:00:00+00:00"
+    },
+    {
+      "id": "ALT-INSPECTION-INS-004",
+      "type": "INSPECTION_PENDING",
+      "category": "INSPECTION",
+      "severity": "MEDIUM",
+      "project_id": "PRJ-004",
+      "camera_id": null,
+      "inspector_id": "INSP-001",
+      "status": "OPEN",
+      "created_at": "2026-09-24T00:00:00+00:00"
+    },
+    {
+      "id": "ALT-INSPECTION-INS-005",
+      "type": "INSPECTION_PENDING",
+      "category": "INSPECTION",
+      "severity": "MEDIUM",
+      "project_id": "PRJ-005",
+      "camera_id": null,
+      "inspector_id": "INSP-002",
+      "status": "OPEN",
+      "created_at": "2026-09-24T00:00:00+00:00"
+    },
+    {
+      "id": "ALT-DELAY-PRJ-005",
+      "type": "PROJECT_DELAY",
+      "category": "PROJECT_DELAY",
+      "severity": "HIGH",
+      "project_id": "PRJ-005",
+      "camera_id": null,
+      "inspector_id": "INSP-002",
+      "status": "OPEN",
+      "created_at": "2026-09-24T00:00:00+00:00"
+    }
+  ]
+}

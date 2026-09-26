@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ATT-001",
+    "project_id": "PRJ-001",
+    "reported_count": 489,
+    "observed_count": 489,
+    "recorded_at": "2026-09-23T09:00:00+00:00",
+    "registered_count": 520,
+    "present": 489,
+    "status": "Compliant"
+  },
+  {
+    "id": "ATT-002",
+    "project_id": "PRJ-002",
+    "reported_count": 332,
+    "observed_count": 328,
+    "recorded_at": "2026-09-23T09:00:00+00:00",
+    "registered_count": 410,
+    "present": 332,
+    "status": "Attention Required"
+  },
+  {
+    "id": "ATT-003",
+    "project_id": "PRJ-003",
+    "reported_count": 619,
+    "observed_count": 619,
+    "recorded_at": "2026-09-23T09:00:00+00:00",
+    "registered_count": 680,
+    "present": 619,
+    "status": "Compliant"
+  },
+  {
+    "id": "ATT-004",
+    "project_id": "PRJ-004",
+    "reported_count": 212,
+    "observed_count": 212,
+    "recorded_at": "2026-09-23T09:00:00+00:00",
+    "registered_count": 290,
+    "present": 212,
+    "status": "Attention Required"
+  },
+  {
+    "id": "ATT-005",
+    "project_id": "PRJ-005",
+    "reported_count": 245,
+    "observed_count": 241,
+    "recorded_at": "2026-09-23T09:00:00+00:00",
+    "registered_count": 360,
+    "present": 245,
+    "status": "Attention Required"
+  },
+  {
+    "id": "ATT-006",
+    "project_id": "PRJ-006",
+    "reported_count": 400,
+    "observed_count": 400,
+    "recorded_at": "2026-09-23T09:00:00+00:00",
+    "registered_count": 450,
+    "present": 400,
+    "status": "Compliant"
+  }
+]

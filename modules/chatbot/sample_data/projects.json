@@ -1,0 +1,44 @@
+[
+  {
+    "project_id": "PRJ-001",
+    "title": "Chennai Community Support Centre",
+    "status": "Completed",
+    "progress_percentage": 100,
+    "risk_score": 22
+  },
+  {
+    "project_id": "PRJ-002",
+    "title": "Madurai Women Support Hub",
+    "status": "On Track",
+    "progress_percentage": 72,
+    "risk_score": 48
+  },
+  {
+    "project_id": "PRJ-003",
+    "title": "Coimbatore Skill Development Centre",
+    "status": "Needs Review",
+    "progress_percentage": 55,
+    "risk_score": 31
+  },
+  {
+    "project_id": "PRJ-004",
+    "title": "Tiruchirappalli Senior Care Centre",
+    "status": "Pending Inspection",
+    "progress_percentage": 40,
+    "risk_score": 67
+  },
+  {
+    "project_id": "PRJ-005",
+    "title": "Salem Rehabilitation Centre",
+    "status": "Delayed",
+    "progress_percentage": 30,
+    "risk_score": 74
+  },
+  {
+    "project_id": "PRJ-006",
+    "title": "Chengalpattu Youth Resource Hub",
+    "status": "In Progress",
+    "progress_percentage": 50,
+    "risk_score": 39
+  }
+]

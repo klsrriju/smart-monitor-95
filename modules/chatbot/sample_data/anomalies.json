@@ -1,0 +1,65 @@
+[
+  {
+    "anomaly_id": "ALT-OCCUPANCY-CAM-002",
+    "project_id": "PRJ-002",
+    "camera_id": "CAM-002",
+    "anomaly_type": "OCCUPANCY",
+    "severity": "MEDIUM",
+    "title": "OCCUPANCY",
+    "description": ""
+  },
+  {
+    "anomaly_id": "ALT-CAMERA-CAM-004",
+    "project_id": "PRJ-004",
+    "camera_id": "CAM-004",
+    "anomaly_type": "CAMERA_OFFLINE",
+    "severity": "HIGH",
+    "title": "CAMERA_OFFLINE",
+    "description": ""
+  },
+  {
+    "anomaly_id": "ALT-INSPECTION-INS-002",
+    "project_id": "PRJ-002",
+    "camera_id": null,
+    "anomaly_type": "INSPECTION_PENDING",
+    "severity": "MEDIUM",
+    "title": "INSPECTION_PENDING",
+    "description": ""
+  },
+  {
+    "anomaly_id": "ALT-INSPECTION-INS-003",
+    "project_id": "PRJ-003",
+    "camera_id": null,
+    "anomaly_type": "INSPECTION_PENDING",
+    "severity": "MEDIUM",
+    "title": "INSPECTION_PENDING",
+    "description": ""
+  },
+  {
+    "anomaly_id": "ALT-INSPECTION-INS-004",
+    "project_id": "PRJ-004",
+    "camera_id": null,
+    "anomaly_type": "INSPECTION_PENDING",
+    "severity": "MEDIUM",
+    "title": "INSPECTION_PENDING",
+    "description": ""
+  },
+  {
+    "anomaly_id": "ALT-INSPECTION-INS-005",
+    "project_id": "PRJ-005",
+    "camera_id": null,
+    "anomaly_type": "INSPECTION_PENDING",
+    "severity": "MEDIUM",
+    "title": "INSPECTION_PENDING",
+    "description": ""
+  },
+  {
+    "anomaly_id": "ALT-DELAY-PRJ-005",
+    "project_id": "PRJ-005",
+    "camera_id": null,
+    "anomaly_type": "PROJECT_DELAY",
+    "severity": "HIGH",
+    "title": "PROJECT_DELAY",
+    "description": ""
+  }
+]

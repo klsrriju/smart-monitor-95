@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>SmartMonitor AI Assistant</title>
+				<!-- Marked.js library for Markdown rendering -->
+				<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+				<style>
+					* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+					body { background-color: #121212; color: #e0e0e0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+					.chat-container { width: 90%; max-width: 850px; height: 85vh; background: #1e1e1e; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 8px 24px rgba(0,0,0,0.5); overflow: hidden; border: 1px solid #333; }
+					.chat-header { background: #252526; padding: 16px 20px; border-bottom: 1px solid #333; display: flex; align-items: center; justify-content: space-between; }
+					.chat-header h2 { font-size: 1.1rem; color: #4fc3f7; }
+					.chat-header span { font-size: 0.8rem; background: #2e7d32; color: #fff; padding: 3px 8px; border-radius: 12px; }
+					.chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+					.message { max-width: 85%; padding: 12px 16px; border-radius: 8px; font-size: 0.95rem; line-height: 1.5; word-wrap: break-word; }
+					.user-message { background: #0288d1; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+					.bot-message { background: #2d2d2d; color: #e0e0e0; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid #3d3d3d; }
+					.bot-message p { margin-bottom: 8px; }
+					.bot-message p:last-child { margin-bottom: 0; }
+					.bot-message ul, .bot-message ol { margin-left: 20px; margin-bottom: 8px; }
+					.intent-tag { font-size: 0.75rem; color: #ffb74d; font-weight: bold; margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+					.input-area { padding: 16px; background: #252526; border-top: 1px solid #333; display: flex; gap: 10px; }
+					input[type="text"] { flex: 1; padding: 12px; background: #1e1e1e; border: 1px solid #444; border-radius: 6px; color: #fff; outline: none; font-size: 0.95rem; }
+					input[type="text"]:focus { border-color: #4fc3f7; }
+					button { padding: 12px 24px; background: #0288d1; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+					button:hover { background: #039be5; }
+				</style>
+			</head>
+	<body>
+		<div class="chat-container">
+			<div class="chat-header">
+				<h2>SmartMonitor AI Assistant</h2>
+				<span>Online</span>
+			</div>
+			<div class="chat-box" id="chatBox">
+				<div class="message bot-message">
+					Hello! I am your SmartMonitor AI assistant. Ask me about site attendance, camera occupancy, safety anomalies, or project risks.
+				</div>
+			</div>
+			<div class="input-area">
+				<input type="text" id="userInput" placeholder="Ask a question (e.g., Show me camera status for CAM-002)..." onkeypress="handleKeyPress(event)" />
+				<button onclick="sendMessage()">Send</button>
+			</div>
+		</div>
+
+		<script>
+			const userId = "user_" + Math.floor(Math.random() * 10000);
+
+			async function sendMessage() {
+			const inputField = document.getElementById("userInput");
+			const query = inputField.value.trim();
+			if (!query) return;
+
+			appendMessage("user", query);
+			inputField.value = "";
+
+			try {
+			const response = await fetch("/api/v1/chat", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ query: query, user_id: userId })
+			});
+
+			const data = await response.json();
+			if (response.ok) {
+			appendMessage("bot", data.response, data.intent);
+			} else {
+			appendMessage("bot", "Error: " + (data.detail || "Failed to fetch response"));
+			}
+			} catch (err) {
+			appendMessage("bot", "Connection error. Make sure the FastAPI backend server is running.");
+			}
+			}
+
+			function appendMessage(sender, text, intent = null) {
+			const chatBox = document.getElementById("chatBox");
+			const msgDiv = document.createElement("div");
+			msgDiv.classList.add("message", sender === "user" ? "user-message" : "bot-message");
+
+			if (intent && sender === "bot") {
+			const tag = document.createElement("span");
+			tag.classList.add("intent-tag");
+			tag.innerText = "Intent: " + intent;
+			msgDiv.appendChild(tag);
+			}
+
+			const contentDiv = document.createElement("div");
+			if (sender === "bot") {
+			contentDiv.innerHTML = marked.parse(text);
+			} else {
+			contentDiv.innerText = text;
+			}
+			msgDiv.appendChild(contentDiv);
+
+			chatBox.appendChild(msgDiv);
+			chatBox.scrollTop = chatBox.scrollHeight;
+			}
+
+			function handleKeyPress(e) {
+			if (e.key === "Enter") sendMessage();
+			}
+		</script>
+	</body>
+</html>

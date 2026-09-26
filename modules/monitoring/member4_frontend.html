@@ -1,0 +1,2500 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/admin/Downloads/Sample_Master_Admin%20(1).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoSJE — Master Enterprise Governance Portal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --ink:#16213E;
+  --ink-70: rgba(22,33,62,0.7);
+  --ink-45: rgba(22,33,62,0.45);
+  --bg:#F4F6FA;
+  --card:#FFFFFF;
+  --line:#E3E7EF;
+  --sidebar:#12213D;
+  --sidebar-active:#2A54D6;
+  --sidebar-text:#AEB9D6;
+  --sidebar-text-dim:#6E7CA0;
+  --accent:#2A54D6;
+  --accent-soft:#E4EAFB;
+  --teal:#0E7C7B;
+  --teal-dark:#0A6463;
+  --teal-soft:#DCF0EF;
+  --green:#1E9E6B;
+  --green-soft:#DFF4EA;
+  --amber:#C98A1F;
+  --amber-soft:#FBEED8;
+  --red:#D34848;
+  --red-soft:#FBE2E2;
+  --star:#E8A33D;
+  --purple:#6B46C1;
+  --purple-soft:#E9D8FD;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+button{ font-family:'Inter',sans-serif; cursor:pointer; }
+input,select,textarea{ font-family:'Inter',sans-serif; }
+
+/* ---------- LOGIN OVERLAY ---------- */
+.login-screen {
+  position:fixed; inset:0; background:var(--sidebar); z-index:1000;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+}
+.login-card {
+  background:#fff; width:100%; max-width:440px; border-radius:16px; padding:36px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+.login-brand { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+.login-brand .mark {
+  width:44px; height:44px; border-radius:50%; background:var(--accent);
+  display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px;
+}
+.login-title { font-size:22px; font-weight:800; margin-bottom:6px; }
+.login-sub { font-size:13px; color:var(--ink-45); margin-bottom:24px; }
+.role-select-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+.role-chip {
+  border:1px solid var(--line); border-radius:10px; padding:12px 8px; text-align:center;
+  cursor:pointer; transition:all .15s; font-size:12px; font-weight:700; color:var(--ink-70);
+}
+.role-chip:hover { border-color:var(--accent); background:var(--accent-soft); }
+.role-chip.selected { border-color:var(--accent); background:var(--accent); color:#fff; }
+
+/* ---------- SHELL & LAYOUT ---------- */
+.shell{ display:grid; grid-template-columns:256px 1fr; min-height:100vh; }
+.sidebar{
+  background:var(--sidebar); padding:26px 18px; display:flex; flex-direction:column;
+  gap:24px; position:sticky; top:0; height:100vh; overflow-y:auto;
+}
+.brand{ display:flex; align-items:center; gap:11px; padding:0 4px; }
+.brand .mark{
+  width:40px; height:40px; border-radius:50%; background:var(--teal);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:13px; color:#fff; flex-shrink:0;
+}
+.brand .name{ font-size:16px; font-weight:800; color:#fff; line-height:1.3; }
+.brand .sub{ font-size:10.5px; color:var(--sidebar-text-dim); }
+.sidebar hr{ border:none; border-top:1px solid #23405f; margin:0 4px; }
+
+.side-nav{ display:flex; flex-direction:column; gap:3px; flex:1; }
+.side-nav button{
+  border:none; background:transparent; color:var(--sidebar-text);
+  font-size:13.5px; font-weight:500; text-align:left;
+  padding:12px 14px; border-radius:8px; position:relative;
+  transition:background .15s, color .15s; display:flex; align-items:center; justify-content:space-between;
+}
+.side-nav button:hover{ background:rgba(255,255,255,.06); color:#fff; }
+.side-nav button.active{ background:var(--sidebar-active); color:#fff; font-weight:700; }
+.nav-count{
+  background:rgba(255,255,255,.16); color:#fff; font-size:10px; font-weight:700;
+  padding:1px 7px; border-radius:10px;
+}
+.side-nav button.active .nav-count{ background:rgba(255,255,255,.28); }
+
+.side-foot{ display:flex; align-items:center; gap:11px; padding:0 4px; border-top:1px solid #23405f; padding-top:16px; }
+.side-foot .mark{
+  width:38px; height:38px; border-radius:50%; background:var(--teal);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:12px; color:#fff; flex-shrink:0;
+}
+.side-foot .who{ font-size:13px; font-weight:700; color:#fff; }
+.side-foot .role{ font-size:10.5px; color:var(--sidebar-text-dim); }
+
+main{ display:flex; flex-direction:column; min-width:0; }
+.topbar{
+  background:var(--card); border-bottom:1px solid var(--line);
+  padding:14px 36px; display:flex; align-items:center; gap:16px;
+}
+.search-box{
+  display:flex; align-items:center; gap:9px; flex:1; max-width:420px;
+  background:var(--bg); border:1px solid var(--line); border-radius:10px;
+  padding:11px 15px; color:#AAB2C4; font-size:12.5px;
+}
+.search-box input{ border:none; background:transparent; outline:none; flex:1; font-size:12.5px; color:var(--ink); }
+.topbar .spacer{ flex:1; }
+.icon-btn{
+  position:relative; width:40px; height:40px; border-radius:50%;
+  background:var(--bg); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; font-size:15px;
+}
+.icon-btn .badge-dot{
+  position:absolute; top:-2px; right:-2px; min-width:16px; height:16px; border-radius:8px;
+  background:var(--red); color:#fff; font-size:9px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; border:2px solid var(--card); padding:0 3px;
+}
+.avatar{
+  width:40px; height:40px; border-radius:50%; background:var(--teal); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;
+}
+
+.content{ padding:28px 36px 70px; max-width:1320px; }
+.crumbs{ font-size:11px; font-weight:700; letter-spacing:.04em; color:var(--teal); margin-bottom:8px; }
+.crumbs span{ margin:0 5px; color:#B6BECD; }
+h1{ font-size:27px; font-weight:800; margin-bottom:6px; }
+.subtitle{ font-size:13.5px; color:var(--ink-45); margin-bottom:24px; }
+
+/* ---------- COMMON COMPONENTS ---------- */
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:26px; box-shadow:0 1px 3px rgba(20,30,60,.05); margin-bottom:20px;
+}
+.card-head{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; }
+.card-head h3{ font-size:16.5px; font-weight:800; }
+.card-head .sub{ font-size:12px; color:var(--ink-45); margin-top:3px; }
+
+.kpi-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:22px; }
+.kpi{
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:19px 21px; box-shadow:0 1px 3px rgba(20,30,60,.05);
+}
+.kpi .label{ font-size:12px; color:var(--ink-45); margin-bottom:11px; }
+.kpi .value{ font-size:29px; font-weight:800; line-height:1; margin-bottom:10px; }
+.kpi .note{ font-size:11.5px; font-weight:700; color:var(--ink-45); }
+.kpi .note.green{ color:var(--green); }
+.kpi .note.red{ color:var(--red); }
+.kpi .note.amber{ color:var(--amber); }
+
+.table-card{
+  background:var(--card); border:1px solid var(--line); border-radius:14px;
+  overflow:hidden; box-shadow:0 1px 3px rgba(20,30,60,.05);
+}
+table{ width:100%; border-collapse:collapse; }
+th{
+  text-align:left; font-size:10.5px; font-weight:700; color:#9AA3B8; letter-spacing:.04em;
+  padding:16px 16px 13px; border-bottom:1px solid var(--line); white-space:nowrap;
+}
+td{ padding:14px 16px; font-size:13px; border-bottom:1px solid var(--line); vertical-align:middle; }
+tbody tr:last-child td{ border-bottom:none; }
+tbody tr:hover{ background:#FAFBFD; }
+td.muted{ color:var(--ink-45); font-size:12.5px; }
+.row-flash{ animation:flash 2s ease; }
+@keyframes flash{ 0%{ background:var(--purple-soft); } 100%{ background:transparent; } }
+
+.badge{ font-size:11px; font-weight:700; padding:4px 11px; border-radius:20px; display:inline-block; white-space:nowrap; }
+.badge.green{ background:var(--green-soft); color:var(--green); }
+.badge.amber{ background:var(--amber-soft); color:var(--amber); }
+.badge.red{ background:var(--red-soft); color:var(--red); }
+.badge.teal{ background:var(--teal-soft); color:var(--teal); }
+.badge.purple{ background:var(--purple-soft); color:var(--purple); }
+.badge.grey{ background:#EDEFF4; color:var(--ink-45); }
+
+.btn{
+  border:none; border-radius:9px; padding:11px 18px;
+  font-weight:700; font-size:13px; color:#fff;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  transition:filter .15s, opacity .15s;
+}
+.btn:hover:not(:disabled){ filter:brightness(1.07); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; }
+.btn.teal{ background:var(--teal); }
+.btn.blue{ background:var(--accent); }
+.btn.purple{ background:var(--purple); }
+.btn.red-outline{ background:#fff; color:var(--red); border:1px solid var(--red-soft); }
+.btn.ghost{ background:#fff; color:var(--ink); border:1px solid var(--line); }
+.btn.small{ padding:7px 13px; font-size:11.5px; border-radius:7px; }
+.linklike{ border:none; background:none; color:var(--accent); font-weight:700; font-size:12.5px; }
+
+/* FORMS */
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; }
+.field label{ display:block; font-size:12px; font-weight:700; margin-bottom:6px; }
+.field input, .field select, .field textarea{
+  width:100%; border:1px solid var(--line); border-radius:9px;
+  padding:11px 13px; font-size:13px; color:var(--ink); background:#fff; outline:none;
+}
+.field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(42,84,214,.12); }
+.field.full{ grid-column:1 / -1; }
+
+/* Filter bar */
+.filter-bar{ display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+.filter-bar select{
+  border:1px solid var(--line); background:var(--card); border-radius:9px;
+  padding:10px 13px; font-size:12.5px; font-weight:600; color:var(--ink); outline:none;
+}
+.filter-bar .search{
+  flex:1; min-width:220px; display:flex; align-items:center; gap:9px;
+  background:var(--card); border:1px solid var(--line); border-radius:9px; padding:0 13px;
+}
+.filter-bar .search input{ flex:1; border:none; outline:none; padding:10px 0; font-size:12.5px; background:transparent; }
+
+/* Legend */
+.legend{ display:flex; gap:16px; font-size:11.5px; color:var(--ink-45); flex-wrap:wrap; }
+.legend span{ display:inline-flex; align-items:center; gap:6px; }
+.legend i{ width:8px; height:8px; border-radius:50%; display:inline-block; }
+.legend i.green{ background:var(--green); }
+.legend i.amber{ background:var(--amber); }
+.legend i.red{ background:var(--red); }
+
+/* ---------- CCTV grid ---------- */
+.cctv-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.feed-tile{ background:var(--ink); border-radius:12px; overflow:hidden; position:relative; aspect-ratio:16/10; }
+.feed-tile .glow{ position:absolute; inset:0; background:linear-gradient(135deg,#24406b,#16213E 65%); }
+.feed-tile.offline .glow{ background:linear-gradient(135deg,#2a2f3d,#16213E 65%); }
+.feed-tile .tag{
+  position:absolute; top:10px; left:10px; display:flex; align-items:center; gap:6px;
+  font-size:11px; font-weight:700; color:#fff; background:rgba(0,0,0,.35); padding:4px 9px; border-radius:20px;
+}
+.feed-tile .tag .pulse{ width:6px; height:6px; border-radius:50%; background:#E8544B; animation:pulse 1.6s infinite; }
+.feed-tile.offline .tag .pulse{ background:#8A8578; animation:none; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+.feed-tile .info{ position:absolute; bottom:0; left:0; right:0; padding:10px 12px; background:linear-gradient(0deg, rgba(0,0,0,.68), transparent); color:#fff; }
+.feed-tile .info .name{ font-size:12.5px; font-weight:700; }
+.feed-tile .info .loc{ font-size:10.5px; color:rgba(255,255,255,.7); margin-top:2px; }
+.feed-tile .ai-chip{
+  position:absolute; top:10px; right:10px; background:rgba(0,0,0,.4); color:#fff;
+  font-size:10px; font-weight:700; padding:4px 8px; border-radius:20px;
+}
+.feed-tile .ai-chip.dev-green{ color:#6EE7B7; }
+.feed-tile .ai-chip.dev-amber{ color:#FCD34D; }
+.feed-tile .ai-chip.dev-red{ color:#FCA5A5; }
+
+/* ---------- Anomalies ---------- */
+.anomaly-list{ display:flex; flex-direction:column; gap:10px; }
+.anomaly{ display:flex; gap:12px; border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+.anomaly .sev{ width:6px; border-radius:4px; flex-shrink:0; }
+.anomaly.high .sev{ background:var(--red); }
+.anomaly.med .sev{ background:var(--amber); }
+.anomaly.low .sev{ background:var(--teal); }
+.anomaly .a-body{ flex:1; }
+.anomaly .a-top{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.anomaly .a-title{ font-size:13.5px; font-weight:700; }
+.anomaly .a-time{ font-size:11px; color:var(--ink-45); white-space:nowrap; }
+.anomaly .a-note{ font-size:12.5px; color:var(--ink-70); margin-top:5px; line-height:1.55; }
+.anomaly .a-actions{ display:flex; gap:8px; margin-top:10px; }
+
+/* ---------- Compliance bars ---------- */
+.dist-list{ display:flex; flex-direction:column; gap:16px; }
+.dist-row .dist-top{ display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:6px; }
+.dist-row .dist-top .n{ color:var(--ink-45); font-weight:700; }
+.bar-track{ height:7px; border-radius:4px; background:var(--line); overflow:hidden; }
+.bar-fill{ height:100%; border-radius:4px; background:var(--green); transition:width .5s ease; }
+.bar-fill.warn{ background:var(--amber); }
+.bar-fill.risk{ background:var(--red); }
+
+/* ---------- Modal ---------- */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(15,20,40,.5); z-index:200;
+  display:none; align-items:center; justify-content:center; padding:20px;
+}
+.modal-backdrop.show{ display:flex; }
+.modal{ background:#fff; border-radius:16px; width:100%; max-width:480px; padding:26px; box-shadow:0 20px 60px rgba(10,15,35,.35); }
+.modal h3{ font-size:17px; font-weight:800; margin-bottom:4px; }
+.modal .modal-sub{ font-size:12.5px; color:var(--ink-45); margin-bottom:18px; }
+.modal-actions{ display:flex; gap:10px; margin-top:20px; }
+.modal-actions .btn{ flex:1; justify-content:center; }
+
+/* ---------- Toast ---------- */
+.toast-stack{ position:fixed; bottom:26px; right:26px; z-index:300; display:flex; flex-direction:column; gap:10px; }
+.toast{
+  background:#fff; border:1px solid var(--line); border-left:4px solid var(--green);
+  border-radius:10px; padding:13px 17px; min-width:280px; box-shadow:0 10px 30px rgba(15,25,50,.15);
+  animation:slidein .25s ease;
+}
+.toast.purple{ border-left-color:var(--purple); }
+.toast .t-title{ font-size:13px; font-weight:700; margin-bottom:3px; }
+.toast .t-sub{ font-size:11.5px; color:var(--ink-45); }
+@keyframes slidein{ from{ transform:translateX(30px); opacity:0; } to{ transform:none; opacity:1; } }
+
+.hidden{ display:none !important; }
+.success-note{ margin-top:22px; border:1px solid var(--green); background:var(--green-soft); border-radius:12px; padding:20px 22px; }
+.placeholder{
+  background:var(--card); border:1px dashed var(--line); border-radius:14px;
+  padding:50px 30px; text-align:center; color:var(--ink-45); font-size:13px;
+}
+.placeholder b{ display:block; font-size:16px; color:var(--ink); margin-bottom:8px; }
+
+@media (max-width:1050px){
+  .shell{ grid-template-columns:1fr; }
+  .sidebar{ position:relative; height:auto; }
+  .kpi-row, .form-grid, .cctv-grid{ grid-template-columns:1fr; }
+}
+
+/* ---------- Chart cards ---------- */
+.chart-row{ display:grid; grid-template-columns:1.3fr 1fr; gap:20px; margin-bottom:20px; }
+@media (max-width:1050px){ .chart-row{ grid-template-columns:1fr; } }
+.chart-legend{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+.chart-legend .li{ display:flex; align-items:center; gap:9px; font-size:12.5px; }
+.chart-legend .sw{ width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+.chart-legend .num{ margin-left:auto; font-weight:800; }
+.bars-chart{ display:flex; align-items:flex-end; gap:14px; height:180px; padding-top:10px; }
+.bars-chart .bcol{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:8px; }
+.bars-chart .bwrap{ width:100%; max-width:34px; height:100%; display:flex; flex-direction:column-reverse; gap:3px; border-radius:5px; overflow:hidden; background:var(--bg); }
+.bars-chart .bseg{ width:100%; border-radius:2px; transition:height .5s ease; }
+.bars-chart .blabel{ font-size:10.5px; color:var(--ink-45); text-align:center; line-height:1.3; }
+
+/* ---------- Stuck / low-attendance chip ---------- */
+.chip-stuck{
+  font-size:10px; font-weight:700; color:#fff; background:var(--red);
+  padding:2px 8px; border-radius:20px; margin-left:8px; display:inline-block; vertical-align:middle;
+}
+.chip-emailed{
+  font-size:10px; font-weight:700; color:var(--ink-45); background:#EDEFF4;
+  padding:2px 8px; border-radius:20px; margin-left:6px; display:inline-block; vertical-align:middle;
+}
+
+/* ---------- Segmented toggle ---------- */
+.seg-toggle{ display:flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; background:var(--card); }
+.seg-toggle button{
+  border:none; background:transparent; padding:10px 15px; font-size:12px; font-weight:700;
+  color:var(--ink-45); border-right:1px solid var(--line);
+}
+.seg-toggle button:last-child{ border-right:none; }
+.seg-toggle button.active{ background:var(--accent-soft); color:var(--accent); }
+
+/* ---------- Review note box ---------- */
+.review-box{
+  background:var(--bg); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+  font-size:12.5px; color:var(--ink-70); line-height:1.6; margin-top:4px;
+}
+.review-box .rb-head{ font-size:11px; font-weight:700; color:var(--ink-45); margin-bottom:6px; text-transform:uppercase; letter-spacing:.03em; }
+
+/* ---------- District compliance stat strip ---------- */
+.compliance-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:20px; }
+@media (max-width:1050px){ .compliance-stats{ grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- AUTH / LOGIN OVERLAY -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="mark">DS</div>
+      <div>
+        <div style="font-size:16px; font-weight:800;">DoSJE Master Portal</div>
+        <div style="font-size:11px; color:var(--ink-45);">Unified Access Point</div>
+      </div>
+    </div>
+    <div class="login-title">Sign In</div>
+    <div class="login-sub">Select your system role to access tailored permissions</div>
+
+    <label style="font-size:12px; font-weight:700; display:block; margin-bottom:8px;">Select Role:</label>
+    <div class="role-select-grid">
+      <div class="role-chip" onclick="selectRole('user', this)">User / NGO</div>
+      <div class="role-chip" onclick="selectRole('inspector', this)">Inspector</div>
+      <div class="role-chip selected" onclick="selectRole('admin', this)">Admin</div>
+    </div>
+
+    <div class="field" style="margin-bottom:14px;">
+      <label>User ID / Official Email</label>
+      <input type="text" id="login-user" value="admin@dosje.gov.in">
+    </div>
+    <div class="field" style="margin-bottom:24px;">
+      <label>Password</label>
+      <input type="password" value="••••••••••••">
+    </div>
+    <button class="btn teal" style="width:100%; padding:14px;" onclick="authenticate()">Authenticate &amp; Continue →</button>
+  </div>
+</div>
+
+<!-- MAIN SHELL -->
+<div class="shell">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark" id="brand-mark">DS</div>
+      <div>
+        <div class="name">DoSJE Portal</div>
+        <div class="sub" id="brand-sub">Project Management</div>
+      </div>
+    </div>
+    <hr>
+
+    <!-- Dynamic Role Navigation -->
+    <nav class="side-nav" id="side-nav"></nav>
+
+    <div class="side-foot">
+      <div class="mark" id="user-avatar-icon">RS</div>
+      <div>
+        <div class="who" id="user-display-name">Ramesh S.</div>
+        <div class="role" id="user-display-role">NGO Coordinator</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main>
+    <div class="topbar">
+      <div class="search-box">🔍 <input type="text" id="global-search" placeholder="Search system resources…"></div>
+      <div class="spacer"></div>
+      <div class="icon-btn">🔔<span class="badge-dot" id="alert-count">3</span></div>
+      <button class="btn ghost small" onclick="logout()">Switch / Logout Role</button>
+      <div class="avatar" id="top-avatar">RS</div>
+    </div>
+
+    <div class="content">
+
+      <!-- ================= ADMIN: DASHBOARD ================= -->
+      <section id="view-admin-dashboard" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> SYSTEM OVERVIEW</div>
+        <h1>Administrator Dashboard</h1>
+        <div class="subtitle">Platform-wide statistics, inspection queues, and critical alerts across all districts</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Total Projects</div><div class="value" id="kpi-total-projects">124</div><div class="note">Across 32 Districts</div></div>
+          <div class="kpi"><div class="label">Field Inspectors</div><div class="value">18</div><div class="note">Active in field</div></div>
+          <div class="kpi"><div class="label">Pending Inspections</div><div class="value" id="kpi-pending">—</div><div class="note amber" id="kpi-pending-note">Requires allocation</div></div>
+          <div class="kpi"><div class="label">Cameras Offline</div><div class="value" id="kpi-offline">—</div><div class="note red">Needs escalation review</div></div>
+        </div>
+
+        <div class="chart-row">
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-head">
+              <div><h3>Project Status Breakdown</h3><div class="sub">Where every registered project stands right now</div></div>
+            </div>
+            <div class="bars-chart" id="dash-status-chart"></div>
+          </div>
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-head">
+              <div><h3>District Compliance Snapshot</h3><div class="sub">Share of districts in each band</div></div>
+            </div>
+            <div id="dash-compliance-donut"></div>
+            <div class="chart-legend" id="dash-compliance-legend"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Projects Awaiting Auto-Assignment</h3>
+              <div class="sub">Projects pending a field audit or with an unresolved surveillance issue</div>
+            </div>
+            <button class="btn purple small" onclick="switchViewById('admin-assignments')">Open full queue →</button>
+          </div>
+          <table>
+            <thead><tr><th>Project ID</th><th>Project Name</th><th>District</th><th>Status</th><th>Assigned Inspector</th></tr></thead>
+            <tbody id="dash-queue-table"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Reschedule Requests</h3><div class="sub"><span id="reschedule-kpi-count">0</span> pending from field inspectors</div></div>
+          </div>
+          <div id="dash-reschedule"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Recent System Activity</h3><div class="sub">Live feed from the audit log</div></div>
+            <button class="btn ghost small" onclick="switchViewById('admin-logs')">View all logs →</button>
+          </div>
+          <div id="dash-activity"></div>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: LIVE SURVEILLANCE ================= -->
+      <section id="view-admin-cctv" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> SURVEILLANCE</div>
+        <h1>Live CCTV Monitoring &amp; AI Audit</h1>
+        <div class="subtitle">Real-time feed status and automated headcount verification across every registered site</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Cameras online</div><div class="value" id="cctv-kpi-online">—</div><div class="note green">of <span id="cctv-kpi-total">—</span> registered</div></div>
+          <div class="kpi"><div class="label">Flagged anomalies</div><div class="value" id="cctv-kpi-flagged">—</div><div class="note red">Deviation &gt; 15%</div></div>
+          <div class="kpi"><div class="label">Under review</div><div class="value" id="cctv-kpi-review">—</div><div class="note amber">Deviation 6–15%</div></div>
+          <div class="kpi"><div class="label">Offline reports pending</div><div class="value" id="cctv-kpi-pending-report">—</div><div class="note">Awaiting inspector review</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Site Feeds</h3><div class="sub">Detected vs. expected headcount, refreshed from the latest inspection sync</div></div>
+            <div class="legend">
+              <span><i class="green"></i>Within tolerance</span>
+              <span><i class="amber"></i>Under review</span>
+              <span><i class="red"></i>Flagged anomaly</span>
+            </div>
+          </div>
+          <div class="filter-bar">
+            <select id="cctv-status-filter" onchange="renderCctv()">
+              <option value="all">All feeds</option>
+              <option value="live">Live — within tolerance</option>
+              <option value="review">Under review</option>
+              <option value="flagged">Flagged anomaly</option>
+              <option value="offline">Offline</option>
+            </select>
+            <div class="search">🔍 <input type="text" id="cctv-search" placeholder="Search site name or district…" oninput="renderCctv()"></div>
+          </div>
+          <div class="cctv-grid" id="cctv-grid"></div>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: PROJECTS ================= -->
+      <section id="view-admin-assignments" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> PROJECTS</div>
+        <h1>Projects</h1>
+        <div class="subtitle">Create and register new projects. Field inspectors are allocated automatically to prevent predictable rotation — admins do not hand-pick inspectors</div>
+
+        <div class="filter-bar">
+          <select id="aq-status-filter" onchange="renderAssignments()">
+            <option value="all">All statuses</option>
+            <option>Pending Field Audit</option>
+            <option>Offline Camera</option>
+            <option>Scheduled</option>
+            <option>Completed</option>
+          </select>
+          <select id="aq-district-filter" onchange="renderAssignments()">
+            <option value="all">All districts</option>
+          </select>
+          <div class="search">🔍 <input type="text" id="aq-search" placeholder="Search by project name…" oninput="renderAssignments()"></div>
+          <button class="btn purple" onclick="runRandomAssignment()">🎲 Auto-assign inspectors</button>
+          <button class="btn blue" onclick="openCreateProjectModal()">+ Create project</button>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Project ID</th><th>Project Name</th><th>District</th><th>Status</th><th>Assigned Inspector</th></tr></thead>
+            <tbody id="assignments-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: INSPECTIONS OVERVIEW ================= -->
+      <section id="view-admin-inspections" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> INSPECTIONS</div>
+        <h1>Inspections Overview</h1>
+        <div class="subtitle">Completed field inspections, submitted reports, and beneficiary feedback ratings</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Completed this month</div><div class="value" id="insp-kpi-completed">—</div><div class="note green">Across all districts</div></div>
+          <div class="kpi"><div class="label">Avg. feedback rating</div><div class="value" id="insp-kpi-rating">—</div><div class="note">Out of 5 stars</div></div>
+          <div class="kpi"><div class="label">Flagged for follow-up</div><div class="value" id="insp-kpi-flagged">—</div><div class="note red">Needs review</div></div>
+          <div class="kpi"><div class="label">Avg. turnaround</div><div class="value">3.2 hrs</div><div class="note">Visit to submission</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Recently Completed Inspections</h3><div class="sub">Report status and inspector rating from site feedback</div></div>
+            <button class="btn ghost small" onclick="switchViewById('admin-assignments')">View pending queue →</button>
+          </div>
+          <table>
+            <thead><tr><th>Project</th><th>Project ID</th><th>Inspector</th><th>Date</th><th>Rating</th><th>Report</th><th>Review</th></tr></thead>
+            <tbody id="inspections-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: FUND UTILIZATION ================= -->
+      <section id="view-admin-funds" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> FINANCIAL ANALYSIS</div>
+        <h1>Fund Utilization</h1>
+        <div class="subtitle">Grant allocation vs. actual spend, matched to project and scheme cost-centers</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Total allocated</div><div class="value" id="fund-kpi-allocated">—</div><div class="note">FY 2026 grants</div></div>
+          <div class="kpi"><div class="label">Total utilized</div><div class="value" id="fund-kpi-utilized">—</div><div class="note" id="fund-kpi-utilized-note">—</div></div>
+          <div class="kpi"><div class="label">Balance remaining</div><div class="value" id="fund-kpi-balance">—</div><div class="note">Across all projects</div></div>
+          <div class="kpi"><div class="label">Flagged projects</div><div class="value" id="fund-kpi-flagged">—</div><div class="note red">Overspend or slow disbursal</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Allocated vs. Utilized by Project</h3><div class="sub">Grant amount released (₹) against amount actually spent</div></div>
+            <div class="chart-legend" style="flex-direction:row; gap:16px; margin-top:0;">
+              <span class="li"><span class="sw" style="background:var(--accent-soft); border:1px solid var(--accent);"></span>Allocated</span>
+              <span class="li"><span class="sw" style="background:var(--teal);"></span>Utilized</span>
+            </div>
+          </div>
+          <div id="fund-bar-chart"></div>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Project</th><th>Scheme</th><th>Allocated</th><th>Utilized</th><th>Balance</th><th>Utilization</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="funds-table"></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Overutilization Reports</h3><div class="sub"><span id="fund-report-kpi-count">0</span> pending from NGOs</div></div>
+          </div>
+          <div id="fund-reports-list"></div>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: ATTENDANCE ANALYSIS ================= -->
+      <section id="view-admin-attendance" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> ATTENDANCE ANALYSIS</div>
+        <h1>Attendance Analysis</h1>
+        <div class="subtitle">Registered beneficiaries vs. AI-verified camera headcount, by site</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Avg. attendance</div><div class="value" id="att-kpi-avg">—</div><div class="note">Across live sites</div></div>
+          <div class="kpi"><div class="label">Sites flagged</div><div class="value" id="att-kpi-flagged">—</div><div class="note red">Attendance below 75%</div></div>
+          <div class="kpi"><div class="label">Beneficiaries tracked</div><div class="value" id="att-kpi-total">—</div><div class="note">Registered across all sites</div></div>
+          <div class="kpi"><div class="label">No data</div><div class="value" id="att-kpi-nodata">—</div><div class="note">Camera offline</div></div>
+        </div>
+
+        <div class="filter-bar">
+          <select id="att-district-filter" onchange="renderAttendance()">
+            <option value="all">All districts</option>
+          </select>
+          <select id="att-view-filter" onchange="renderAttendance()">
+            <option value="all">All attendance levels</option>
+            <option value="low">Low attendance only (&lt;75%)</option>
+            <option value="stuck">Stuck / unchanged</option>
+          </select>
+          <div class="search">🔍 <input type="text" id="att-search" placeholder="Search project or district…" oninput="renderAttendance()"></div>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Project</th><th>District</th><th>Registered</th><th>Verified present</th><th>Attendance</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="attendance-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: EVIDENCE & DOCUMENTS ================= -->
+      <section id="view-admin-evidence" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> EVIDENCE REVIEW</div>
+        <h1>Evidence &amp; Documents</h1>
+        <div class="subtitle">Documents and evidence uploaded by NGOs — review and verify before approval</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Total documents</div><div class="value" id="ev-kpi-total">—</div><div class="note">Across all projects</div></div>
+          <div class="kpi"><div class="label">Pending review</div><div class="value" id="ev-kpi-pending">—</div><div class="note amber">Awaiting your action</div></div>
+          <div class="kpi"><div class="label">Verified</div><div class="value" id="ev-kpi-verified">—</div><div class="note green">Accepted</div></div>
+          <div class="kpi"><div class="label">Rejected</div><div class="value" id="ev-kpi-rejected">—</div><div class="note red">Resubmission requested</div></div>
+        </div>
+
+        <div class="filter-bar">
+          <select id="ev-status-filter" onchange="renderEvidence()">
+            <option value="all">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Verified">Verified</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+          <div class="search">🔍 <input type="text" id="ev-search" placeholder="Search project or document…" oninput="renderEvidence()"></div>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Document</th><th>Type</th><th>Project</th><th>Uploaded by</th><th>Uploaded</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="evidence-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: CREATE NEW LOGIN ================= -->
+      <section id="view-admin-newuser" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> GOVERNANCE</div>
+        <h1>Create New User Login</h1>
+        <div class="subtitle">Onboard a new NGO coordinator, field inspector, or administrator with system credentials</div>
+
+        <div class="card">
+          <h3>New User Details</h3>
+          <div class="form-grid">
+            <div class="field"><label>Full name <span style="color:var(--red);">*</span></label><input type="text" id="nu-name" placeholder="e.g. Priya Nair"></div>
+            <div class="field"><label>Official email <span style="color:var(--red);">*</span></label><input type="text" id="nu-email" placeholder="name@organisation.org"></div>
+            <div class="field">
+              <label>Role <span style="color:var(--red);">*</span></label>
+              <select id="nu-role">
+                <option>User / NGO</option>
+                <option>Inspector</option>
+                <option>Administrator</option>
+              </select>
+            </div>
+            <div class="field"><label>Organization / Department <span style="color:var(--red);">*</span></label><input type="text" id="nu-org" placeholder="e.g. GGG Welfare Trust"></div>
+            <div class="field full"><label>Assigned district / jurisdiction</label><input type="text" id="nu-district" placeholder="e.g. Kanchipuram (optional)"></div>
+          </div>
+          <div style="display:flex; gap:12px; align-items:center; margin-top:20px;">
+            <button class="btn blue" onclick="createNewLogin()">Generate credentials &amp; create login →</button>
+            <span style="font-size:11.5px; color:var(--ink-45);">A temporary password will be generated and the user is required to change it at first login</span>
+          </div>
+
+          <div class="success-note hidden" id="nu-success">
+            <div style="font-weight:800; color:#14724F; margin-bottom:8px;">✓ Login created successfully</div>
+            <div style="font-size:12.5px; color:var(--ink-70); margin-bottom:14px;">Share these credentials with the user through an official channel. They will be prompted to set a new password on first sign-in.</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; background:#fff; border:1px solid var(--green); border-radius:10px; padding:14px 18px;">
+              <div><div style="font-size:10.5px; font-weight:700; color:#9AA3B8; margin-bottom:4px;">USERNAME</div><div style="font-size:14px; font-weight:800;" id="nu-out-email">—</div></div>
+              <div><div style="font-size:10.5px; font-weight:700; color:#9AA3B8; margin-bottom:4px;">TEMPORARY PASSWORD</div><div style="font-size:14px; font-weight:800;" id="nu-out-password">—</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: ANOMALIES ================= -->
+      <section id="view-admin-anomalies" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> ANALYTICS</div>
+        <h1>Anomaly &amp; Attendance Analytics</h1>
+        <div class="subtitle">AI-flagged irregularities from surveillance feeds, headcount checks and offline-camera reports</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Open</div><div class="value" id="an-kpi-open">—</div><div class="note red">Needs your review</div></div>
+          <div class="kpi"><div class="label">Escalated</div><div class="value" id="an-kpi-escalated">—</div><div class="note amber">Sent for action</div></div>
+          <div class="kpi"><div class="label">Acknowledged</div><div class="value" id="an-kpi-ack">—</div><div class="note green">Closed this month</div></div>
+          <div class="kpi"><div class="label">Avg. resolution</div><div class="value">1.8 days</div><div class="note">Open to closed</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><div><h3>Flagged Cases</h3><div class="sub">Ordered by severity, most recent first</div></div></div>
+          <div class="anomaly-list" id="anomaly-list"></div>
+        </div>
+      </section>
+
+
+      <!-- ================= MEMBER 4: MONITORING ENGINE ================= -->
+      <section id="view-member4-monitoring" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> MEMBER 4 MONITORING ENGINE</div>
+        <h1>Inspection, Evidence &amp; Risk Engine</h1>
+        <div class="subtitle">Independent backend connected through FastAPI. This module does not modify CCTV/YOLO.</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Inspections</div><div class="value" id="m4-insp-count">—</div><div class="note">Backend records</div></div>
+          <div class="kpi"><div class="label">Open anomalies</div><div class="value" id="m4-anomaly-count">—</div><div class="note red">Requires review</div></div>
+          <div class="kpi"><div class="label">Risk score</div><div class="value" id="m4-risk-score">—</div><div class="note" id="m4-risk-band">Select project</div></div>
+          <div class="kpi"><div class="label">Surprise inspection</div><div class="value" id="m4-surprise">—</div><div class="note amber">Triggered by HIGH anomaly</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>Project Monitoring</h3><div class="sub">Run backend rules against independent sample project metrics</div></div>
+            <button class="btn teal small" onclick="m4Refresh()">↻ Refresh</button>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Project ID</label>
+              <select id="m4-project">
+                <option value="PS-26095">PS-26095 — Community Skills Centre</option>
+                <option value="PS-26096">PS-26096 — Rural Learning Hub</option>
+              </select>
+            </div>
+            <div class="field"><label>Inspection status</label>
+              <select id="m4-insp-status"><option>COMPLETED</option><option>SCHEDULED</option><option>IN_PROGRESS</option><option>CANCELLED</option></select>
+            </div>
+            <div class="field"><label>Expected attendance %</label><input id="m4-expected" type="number" value="90"></div>
+            <div class="field"><label>Actual attendance %</label><input id="m4-actual" type="number" value="62"></div>
+            <div class="field"><label>Capacity</label><input id="m4-capacity" type="number" value="25"></div>
+            <div class="field"><label>People detected by CCTV/YOLO</label><input id="m4-people" type="number" value="31"></div>
+            <div class="field"><label>Fund utilization %</label><input id="m4-fund" type="number" value="80"></div>
+            <div class="field"><label>Physical progress %</label><input id="m4-progress" type="number" value="55"></div>
+            <div class="field"><label>Financial gap threshold %</label><input id="m4-fthreshold" type="number" value="20"></div>
+            <div class="field"><label>Attendance gap threshold %</label><input id="m4-athreshold" type="number" value="15"></div>
+            <div class="field"><label>Required evidence count</label><input id="m4-required" type="number" value="1"></div>
+            <div class="field"><label>Total evidence count</label><input id="m4-total-evidence" type="number" value="0"></div>
+            <div class="field"><label>Verified evidence count</label><input id="m4-verified" type="number" value="0"></div>
+            <div class="field"><label>Repeated issue count</label><input id="m4-repeated" type="number" value="3"></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:18px;">
+            <button class="btn blue" onclick="m4RunDetection()">Run anomaly engine</button>
+            <button class="btn ghost" onclick="m4LoadRisk()">Calculate risk</button>
+            <button class="btn purple" onclick="m4OpenReport()">Open JSON report</button>
+            <button class="btn ghost" onclick="m4DownloadCSV()">CSV report</button>
+          </div>
+        </div>
+
+        <div class="chart-row">
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-head"><div><h3>Risk Components</h3><div class="sub">Calculated by the backend, maximum 100 points</div></div></div>
+            <div id="m4-risk-components" class="dist-list"></div>
+          </div>
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-head"><div><h3>Surprise Inspection</h3><div class="sub">Automatic recommendation when a HIGH anomaly is open</div></div></div>
+            <div id="m4-surprise-box" class="review-box">Run the anomaly engine or risk calculation.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><div><h3>Inspection Management</h3><div class="sub">Create and view real backend inspection records</div></div></div>
+          <div class="form-grid">
+            <div class="field"><label>Inspector ID</label><input id="m4-inspector" value="INSP-004"></div>
+            <div class="field"><label>Date</label><input id="m4-date" type="date"></div>
+            <div class="field full"><label>Remarks</label><textarea id="m4-remarks" rows="2">Independent Member 4 inspection.</textarea></div>
+          </div>
+          <button class="btn teal" style="margin-top:16px;" onclick="m4CreateInspection()">Create inspection</button>
+          <div class="table-card" style="margin-top:18px;">
+            <table><thead><tr><th>ID</th><th>Project</th><th>Inspector</th><th>Date</th><th>Status</th><th>Remarks</th></tr></thead>
+              <tbody id="m4-inspection-table"></tbody></table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><div><h3>Backend Output</h3><div class="sub">Latest API response</div></div></div>
+          <pre id="m4-output" style="background:#0f172a;color:#e2e8f0;padding:18px;border-radius:10px;overflow:auto;font-size:12px;max-height:420px;">Waiting for API call…</pre>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: DISTRICT COMPLIANCE ================= -->
+      <section id="view-admin-compliance" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> ANALYTICS</div>
+        <h1>District-wise Compliance</h1>
+        <div class="subtitle">Share of projects meeting reporting, attendance and inspection thresholds this month</div>
+        <div class="card">
+          <div class="dist-list" id="dist-list"></div>
+          <div class="compliance-stats" id="dist-stats"></div>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: USER & ROLE MANAGEMENT ================= -->
+      <section id="view-admin-users" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> GOVERNANCE</div>
+        <h1>User &amp; Role Management</h1>
+        <div class="subtitle">Control platform access rights, assign roles, and manage system credentials</div>
+
+        <div class="filter-bar">
+          <select id="u-role-filter" onchange="renderUsers()">
+            <option value="all">All roles</option>
+            <option>User / NGO</option>
+            <option>Inspector</option>
+            <option>Administrator</option>
+          </select>
+          <div class="search">🔍 <input type="text" id="u-search" placeholder="Search by name or email…" oninput="renderUsers()"></div>
+          <div style="flex:1;"></div>
+          <button class="btn blue" onclick="openUserModal(null)">+ Add User</button>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead><tr><th>User Name</th><th>Email</th><th>Assigned Role</th><th>Organization / Department</th><th>Status</th><th>Management</th></tr></thead>
+            <tbody id="users-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= ADMIN: AUDIT LOGS ================= -->
+      <section id="view-admin-logs" class="role-view hidden">
+        <div class="crumbs">ADMIN <span>›</span> SECURITY</div>
+        <h1>System Audit Logs</h1>
+        <div class="subtitle">Complete trail of operations executed within the portal — updates live as actions are taken</div>
+
+        <div class="filter-bar">
+          <select id="log-role-filter" onchange="renderLogs()">
+            <option value="all">All roles</option>
+            <option>NGO User</option>
+            <option>Inspector</option>
+            <option>Admin</option>
+            <option>System</option>
+          </select>
+          <select id="log-category-filter" onchange="renderLogs()">
+            <option value="all">All action types</option>
+            <option value="project">Projects</option>
+            <option value="assignment">Assignments</option>
+            <option value="evidence">Evidence</option>
+            <option value="anomaly">Anomalies</option>
+            <option value="attendance">Attendance alerts</option>
+            <option value="reschedule">Reschedule requests</option>
+            <option value="user">User &amp; access</option>
+          </select>
+          <div class="search">🔍 <input type="text" id="log-search" placeholder="Search actor, action or project ID…" oninput="renderLogs()"></div>
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Timestamp</th><th>Actor</th><th>Role</th><th>Action Performed</th><th>Target Resource</th></tr></thead>
+            <tbody id="logs-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= INSPECTOR VIEWS (unchanged stubs) ================= -->
+      <section id="view-inspector-cctv" class="role-view hidden">
+        <div class="crumbs">INSPECTOR <span>›</span> SURVEILLANCE</div>
+        <h1>CCTV Field Monitoring &amp; AI Audit</h1>
+        <div class="subtitle">Live verification and automated headcount validation</div>
+        <div class="card"><h3>Active Feeds &amp; Verification</h3><p style="font-size:13px; color:var(--ink-45); margin-top:8px;">Live feeds and verification tools for field inspectors.</p></div>
+      </section>
+
+      <section id="view-inspector-assigned" class="role-view hidden">
+        <div class="crumbs">INSPECTOR <span>›</span> AUDITS</div>
+        <h1>Assigned Physical Inspections</h1>
+        <div class="subtitle">Projects assigned for physical site verification and beneficiary validation</div>
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Project</th><th>District</th><th>Visit date</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="inspector-assigned-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= USER / NGO VIEWS (unchanged stubs) ================= -->
+      <section id="view-user-create" class="role-view hidden">
+        <div class="crumbs">NGO PORTAL <span>›</span> SUBMISSIONS</div>
+        <h1>Submit Project Details</h1>
+        <div class="subtitle">Enter your project information and upload required supporting documents</div>
+        <div class="card">
+          <h3>Project Information</h3>
+          <div class="form-grid">
+            <div class="field"><label>Project Name</label><input type="text" placeholder="e.g. Women's Skill Centre"></div>
+            <div class="field"><label>Project ID</label><input type="text" placeholder="PRJ-2026-00123"></div>
+            <div class="field"><label>Organization</label><input type="text" placeholder="Registered NGO Name"></div>
+            <div class="field"><label>District</label><input type="text" placeholder="District"></div>
+          </div>
+          <button class="btn teal" style="margin-top:18px;">Submit Project Details →</button>
+        </div>
+      </section>
+
+      <section id="view-user-funds" class="role-view hidden">
+        <div class="crumbs">NGO PORTAL <span>›</span> FUND UTILIZATION</div>
+        <h1>My Project Funds</h1>
+        <div class="subtitle">Grant allocation vs. actual spend for your registered project</div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">Allocated</div><div class="value" id="ngo-fund-allocated">—</div><div class="note">FY 2026 grant</div></div>
+          <div class="kpi"><div class="label">Utilized</div><div class="value" id="ngo-fund-utilized">—</div><div class="note" id="ngo-fund-utilized-note">—</div></div>
+          <div class="kpi"><div class="label">Balance</div><div class="value" id="ngo-fund-balance">—</div><div class="note">Remaining</div></div>
+          <div class="kpi"><div class="label">Status</div><div class="value" id="ngo-fund-status">—</div><div class="note" id="ngo-fund-status-note">—</div></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3 id="ngo-fund-project-name">—</h3><div class="sub" id="ngo-fund-project-id">—</div></div>
+          </div>
+          <div id="ngo-fund-bar" style="margin-bottom:16px;"></div>
+          <div id="ngo-fund-overspend-notice"></div>
+        </div>
+      </section>
+
+      <section id="view-user-history" class="role-view hidden">
+        <div class="crumbs">NGO PORTAL <span>›</span> HISTORY</div>
+        <h1>Upload &amp; Submission History</h1>
+        <div class="subtitle">Track the status of your submitted projects</div>
+        <div class="card"><h3>Submissions</h3><p style="font-size:13px; color:var(--ink-45); margin-top:8px;">List of submitted records and live approval status.</p></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Create Project Modal -->
+<div class="modal-backdrop" id="create-project-modal">
+  <div class="modal">
+    <h3>Create Project</h3>
+    <div class="modal-sub">Registers the project and adds it to the queue for automatic inspector allocation</div>
+    <div class="field" style="margin-bottom:14px;"><label>Project name</label><input type="text" id="cp-name" placeholder="e.g. Amrutha Vocational Centre"></div>
+    <div class="field" style="margin-bottom:14px;"><label>District</label><input type="text" id="cp-district" placeholder="e.g. Thanjavur"></div>
+    <div class="field"><label>Organization / NGO</label><input type="text" id="cp-org" placeholder="e.g. Amrutha Welfare Trust"></div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('create-project-modal')">Cancel</button>
+      <button class="btn blue" onclick="createProject()">Create project →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reschedule Request Modal -->
+<div class="modal-backdrop" id="reschedule-modal">
+  <div class="modal">
+    <h3>Request Reschedule</h3>
+    <div class="modal-sub" id="reschedule-modal-sub">—</div>
+    <div class="field">
+      <label>Reason for reschedule</label>
+      <textarea id="reschedule-reason" rows="3" placeholder="e.g. Site inaccessible due to weather, need 2 more days…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('reschedule-modal')">Cancel</button>
+      <button class="btn purple" onclick="submitRescheduleRequest()">Send request →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reschedule Decision Modal (Admin) -->
+<div class="modal-backdrop" id="reschedule-decision-modal">
+  <div class="modal">
+    <h3>Reschedule Request</h3>
+    <div class="modal-sub" id="reschedule-decision-sub">—</div>
+    <div class="review-box" id="reschedule-decision-reason" style="margin-bottom:6px;"></div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('reschedule-decision-modal')">Close</button>
+      <button class="btn red-outline" onclick="resolveReschedule('Denied')">Deny</button>
+      <button class="btn teal" onclick="resolveReschedule('Approved')">Approve new date</button>
+    </div>
+  </div>
+</div>
+
+<!-- Inspector Review Modal (read-only) -->
+<div class="modal-backdrop" id="review-modal">
+  <div class="modal">
+    <h3>Inspector Review</h3>
+    <div class="modal-sub" id="review-modal-sub">—</div>
+    <div class="review-box">
+      <div class="rb-head">Feedback / reason</div>
+      <div id="review-modal-body">—</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('review-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Evidence Decision Viewer (read-only) -->
+<div class="modal-backdrop" id="evidence-view-modal">
+  <div class="modal">
+    <h3>Review Decision</h3>
+    <div class="modal-sub" id="evidence-view-sub">—</div>
+    <div class="review-box">
+      <div class="rb-head">Admin remarks</div>
+      <div id="evidence-view-body">—</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('evidence-view-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Fund Overutilization Report Modal (NGO submits) -->
+<div class="modal-backdrop" id="fund-report-modal">
+  <div class="modal">
+    <h3>Report Fund Overutilization</h3>
+    <div class="modal-sub" id="fund-report-modal-sub">—</div>
+    <div class="field">
+      <label>Reason for overutilization</label>
+      <textarea id="fund-report-reason" rows="3" placeholder="e.g. Additional trainer stipends were required due to extended batch duration…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('fund-report-modal')">Cancel</button>
+      <button class="btn teal" onclick="submitFundReport()">Submit report →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Fund Overutilization Report View/Decision Modal -->
+<div class="modal-backdrop" id="fund-report-decision-modal">
+  <div class="modal">
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px;">
+      <h3>Overutilization Report</h3>
+      <span class="badge" id="fund-report-decision-status" style="margin-top:1px;">—</span>
+    </div>
+    <div class="modal-sub" id="fund-report-decision-sub">—</div>
+    <div class="review-box" style="margin-bottom:6px;">
+      <div class="rb-head">Reason given</div>
+      <div id="fund-report-decision-reason">—</div>
+    </div>
+    <div class="modal-sub" id="fund-report-decision-meta" style="margin-top:-4px; margin-bottom:0;"></div>
+    <div class="modal-actions" id="fund-report-decision-actions">
+      <button class="btn ghost" onclick="closeModal('fund-report-decision-modal')">Close</button>
+      <button class="btn red-outline" id="fund-report-decision-escalate" onclick="resolveFundReport('Escalated')">Escalate ⚠</button>
+      <button class="btn teal" id="fund-report-decision-acknowledge" onclick="resolveFundReport('Acknowledged')">Acknowledge ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- Anomaly Review Modal -->
+<div class="modal-backdrop" id="anomaly-modal">
+  <div class="modal">
+    <h3>Review Flagged Case</h3>
+    <div class="modal-sub" id="anomaly-modal-sub">—</div>
+    <div class="field">
+      <label>Admin remarks</label>
+      <textarea id="anomaly-remarks" rows="3" placeholder="Add a note for the record…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('anomaly-modal')">Close</button>
+      <button class="btn red-outline" onclick="resolveAnomaly('escalated')">Escalate ⚠</button>
+      <button class="btn teal" onclick="resolveAnomaly('acknowledged')">Acknowledge ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- Evidence Review Modal -->
+<div class="modal-backdrop" id="evidence-modal">
+  <div class="modal">
+    <h3>Review Uploaded Evidence</h3>
+    <div class="modal-sub" id="evidence-modal-sub">—</div>
+    <div class="field">
+      <label>Review remarks</label>
+      <textarea id="evidence-remarks" rows="3" placeholder="Add a note — required if rejecting…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('evidence-modal')">Close</button>
+      <button class="btn red-outline" onclick="resolveEvidence('Rejected')">Reject ✕</button>
+      <button class="btn teal" onclick="resolveEvidence('Verified')">Verify ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add / Edit User Modal -->
+<div class="modal-backdrop" id="user-modal">
+  <div class="modal">
+    <h3 id="user-modal-title">Add User</h3>
+    <div class="modal-sub">Grants platform access with the selected role and permissions</div>
+    <div class="form-grid">
+      <div class="field full"><label>Full name</label><input type="text" id="um-name" placeholder="e.g. Priya Nair"></div>
+      <div class="field full"><label>Email</label><input type="text" id="um-email" placeholder="name@organisation.org"></div>
+      <div class="field">
+        <label>Role</label>
+        <select id="um-role">
+          <option>User / NGO</option>
+          <option>Inspector</option>
+          <option>Administrator</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select id="um-status"><option>Active</option><option>Suspended</option></select>
+      </div>
+      <div class="field full"><label>Organization / Department</label><input type="text" id="um-org" placeholder="e.g. GGG Welfare Trust"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" onclick="closeModal('user-modal')">Cancel</button>
+      <button class="btn blue" onclick="saveUser()">Save user →</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toast-stack"></div>
+
+<script>
+/* =================================================================
+   AUTH / ROLE SWITCHING (from the uploaded shell, kept intact)
+================================================================= */
+let currentRole = 'admin';
+
+const navConfig = {
+  user: [
+    { label: 'Create Project', view: 'user-create' },
+    { label: 'My Project Funds', view: 'user-funds' },
+    { label: 'Upload History', view: 'user-history' }
+  ],
+  inspector: [
+    { label: 'CCTV Surveillance', view: 'inspector-cctv' },
+    { label: 'Assigned Inspections', view: 'inspector-assigned' }
+  ],
+  admin: [
+    { label: 'Dashboard', view: 'admin-dashboard' },
+    { label: 'Live Surveillance', view: 'admin-cctv' },
+    { label: 'Projects', view: 'admin-assignments', countId:'nav-pending-count' },
+    { label: 'Inspections Overview', view: 'admin-inspections' },
+    { label: 'Fund Utilization', view: 'admin-funds' },
+    { label: 'Attendance Analysis', view: 'admin-attendance' },
+    { label: 'Evidence & Documents', view: 'admin-evidence', countId:'nav-evidence-count' },
+    { label: 'Anomaly Analytics', view: 'admin-anomalies', countId:'nav-anomaly-count' },
+    { label: 'Member 4 Monitoring', view: 'member4-monitoring', countId:'nav-m4-count' },
+    { label: 'District Compliance', view: 'admin-compliance' },
+    { label: 'User & Roles', view: 'admin-users' },
+    { label: 'Create New Login', view: 'admin-newuser' },
+    { label: 'Audit Logs', view: 'admin-logs' }
+  ]
+};
+
+const userProfiles = {
+  user: { name: 'Ramesh S.', role: 'NGO Coordinator', mark: 'RS', bg: 'var(--teal)' },
+  inspector: { name: 'Arvind R.', role: 'Field Inspector', mark: 'AR', bg: 'var(--accent)' },
+  admin: { name: 'Admin Master', role: 'System Administrator', mark: 'AD', bg: 'var(--purple)' }
+};
+
+function selectRole(role, el) {
+  currentRole = role;
+  document.querySelectorAll('.role-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const userField = document.getElementById('login-user');
+  if(role === 'user') userField.value = 'ramesh.s@ngo.org';
+  if(role === 'inspector') userField.value = 'arvind.r@pmu.gov.in';
+  if(role === 'admin') userField.value = 'admin@dosje.gov.in';
+}
+
+function authenticate() {
+  if (currentRole === 'inspector') {
+    window.location.href = 'file:///C:/Users/admin/Downloads/inspector-portal%20Updated.html';
+    return;
+  }
+
+  if (currentRole === 'user') {
+    window.location.href = 'file:///C:/Users/admin/Downloads/user.html';
+    return;
+  }
+
+  document.getElementById('login-screen').classList.add('hidden');
+
+  const profile = userProfiles[currentRole];
+  document.getElementById('user-display-name').textContent = profile.name;
+  document.getElementById('user-display-role').textContent = profile.role;
+  document.getElementById('user-avatar-icon').textContent = profile.mark;
+  document.getElementById('user-avatar-icon').style.background = profile.bg;
+  document.getElementById('top-avatar').textContent = profile.mark;
+  document.getElementById('top-avatar').style.background = profile.bg;
+
+  renderSideNav();
+  switchView(navConfig[currentRole][0].view);
+
+  if(currentRole === 'admin') initAdminData();
+  if(currentRole === 'user') renderUserFunds();
+}
+
+function renderSideNav(){
+  const sideNav = document.getElementById('side-nav');
+  sideNav.innerHTML = '';
+  navConfig[currentRole].forEach((item, idx) => {
+    const btn = document.createElement('button');
+    const countSpan = item.countId ? `<span class="nav-count" id="${item.countId}">0</span>` : '';
+    btn.innerHTML = `<span>${item.label}</span>${countSpan}`;
+    if(idx === 0) btn.classList.add('active');
+    btn.dataset.view = item.view;
+    btn.onclick = () => switchView(item.view, btn);
+    sideNav.appendChild(btn);
+  });
+}
+
+function switchView(viewId, btnEl) {
+  document.querySelectorAll('.role-view').forEach(v => v.classList.add('hidden'));
+  const target = document.getElementById('view-' + viewId);
+  if(target) target.classList.remove('hidden');
+
+  document.querySelectorAll('.side-nav button').forEach(b => b.classList.remove('active'));
+  const activeBtn = btnEl || document.querySelector(`.side-nav button[data-view="${viewId}"]`);
+  if(activeBtn) activeBtn.classList.add('active');
+
+  if(viewId === 'admin-dashboard') renderDashboard();
+  if(viewId === 'admin-cctv') renderCctv();
+  if(viewId === 'admin-assignments') renderAssignments();
+  if(viewId === 'admin-inspections') renderInspectionsOverview();
+  if(viewId === 'admin-funds') renderFunds();
+  if(viewId === 'admin-attendance') renderAttendance();
+  if(viewId === 'admin-evidence') renderEvidence();
+  if(viewId === 'admin-anomalies') renderAnomalies();
+  if(viewId === 'member4-monitoring') m4Refresh();
+  if(viewId === 'admin-compliance') renderCompliance();
+  if(viewId === 'admin-users') renderUsers();
+  if(viewId === 'admin-newuser') resetNewUserForm();
+  if(viewId === 'admin-logs') renderLogs();
+  if(viewId === 'inspector-assigned') renderInspectorAssigned();
+  if(viewId === 'user-funds') renderUserFunds();
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function switchViewById(id){ switchView(id); }
+
+function logout() {
+  document.querySelectorAll('.role-view').forEach(v => v.classList.add('hidden'));
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+
+function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+
+function showToast(title, sub, tone){
+  const el = document.createElement('div');
+  el.className = 'toast' + (tone === 'purple' ? ' purple' : '');
+  el.innerHTML = `<div class="t-title">${title}</div><div class="t-sub">${sub}</div>`;
+  document.getElementById('toast-stack').appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=>el.remove(),300); }, 3800);
+}
+
+/* =================================================================
+   ADMIN DATA MODEL
+================================================================= */
+const inspectorRoster = ["Arvind R. (Team 4)", "Meena K. (Team 1)", "Suresh P. (Team 2)", "Divya N. (Team 3)", "Karthik V. (Team 5)"];
+
+let assignmentQueue = [
+  { id:"PRJ-2026-00811", name:"GGG Skill Centre", district:"Chennai", status:"Pending Field Audit", inspector:"Arvind R. (Team 4)" },
+  { id:"PRJ-2026-00778", name:"MNOP De-addiction Centre", district:"Coimbatore", status:"Offline Camera", inspector:null },
+  { id:"PRJ-2026-00795", name:"ABRF Old Age Home", district:"Madurai", status:"Scheduled", inspector:"Meena K. (Team 1)" },
+  { id:"PRJ-2026-00842", name:"GPRSA Vocational Institute", district:"Salem", status:"Pending Field Audit", inspector:null },
+  { id:"PRJ-2026-00760", name:"KKD Skill Development NGO", district:"Tiruchirappalli", status:"Scheduled", inspector:"Karthik V. (Team 5)" },
+  { id:"PRJ-2026-00699", name:"XYZ Women's Skill Centre", district:"Kanchipuram", status:"Completed", inspector:"Divya N. (Team 3)" },
+  { id:"PRJ-2026-00654", name:"Navjyoti Elder Care", district:"Vellore", status:"Pending Field Audit", inspector:null }
+];
+let cctvSites = [
+  { name:"XYZ Women's Skill Centre", district:"Kanchipuram", live:true, headCount:29, expected:31 },
+  { name:"GGG Skill Centre", district:"Chennai", live:true, headCount:37, expected:39 },
+  { name:"ABRF Old Age Home", district:"Madurai", live:true, headCount:14, expected:19 },
+  { name:"MNOP De-addiction Centre", district:"Coimbatore", live:false },
+  { name:"GPRSA Vocational Institute", district:"Salem", live:true, headCount:22, expected:24 },
+  { name:"KKD Skill Development NGO", district:"Tiruchirappalli", live:true, headCount:33, expected:33 },
+  { name:"Navjyoti Elder Care", district:"Vellore", live:true, headCount:18, expected:30, stuckDays:4 },
+  { name:"Saksham Vocational Institute", district:"Salem", live:false },
+  { name:"Umang Rehab Centre", district:"Coimbatore", live:true, headCount:26, expected:27 }
+];
+
+let anomalies = [
+  { title:"Attendance mismatch — Navjyoti Elder Care", project:"PRJ-2026-00654", sev:"high",
+    note:"Register count (30) does not match camera headcount (18) for the third consecutive day.",
+    time:"Today, 9:14 AM", status:"open" },
+  { title:"Camera offline without a filed reason — MNOP De-addiction Centre", project:"PRJ-2026-00778", sev:"high",
+    note:"Camera has been offline for 2 hr 14 min. No report submitted by the site; past the 30-minute window.",
+    time:"Today, 8:02 AM", status:"open" },
+  { title:"Headcount deviation — ABRF Old Age Home", project:"PRJ-2026-00795", sev:"med",
+    note:"Detected count (14) is 26% below the expected count (19). Inspector review recommended.",
+    time:"Yesterday, 6:20 PM", status:"open" },
+  { title:"Delayed report submission — GPRSA Vocational Institute", project:"PRJ-2026-00842", sev:"low",
+    note:"Inspection completed on site but the report was filed 19 hours after the visit window.",
+    time:"2 days ago", status:"acknowledged" },
+  { title:"Low inspector rating — ABRF Old Age Home", project:"PRJ-2026-00795", sev:"med",
+    note:"Inspector Meena K. rated this site 3.6★ and flagged the report following the site visit. See the linked review for the full reason.",
+    time:"2 Sep 2026, 4:10 PM", status:"open" }
+];
+let pendingAnomalyIndex = null;
+
+let districts = [
+  { name:"Chennai", pct:92 }, { name:"Madurai", pct:81 }, { name:"Coimbatore", pct:63 },
+  { name:"Kanchipuram", pct:96 }, { name:"Salem", pct:58 }, { name:"Tiruchirappalli", pct:69 },
+  { name:"Vellore", pct:47 }
+];
+
+/* ---- Fund Utilization ---- */
+let grants = [
+  { project:"GGG Skill Centre", id:"PRJ-2026-00811", scheme:"Skill Development for Women", allocated:1200000, utilized:860000 },
+  { project:"ABRF Old Age Home", id:"PRJ-2026-00795", scheme:"Senior Citizen Welfare", allocated:950000, utilized:1015000 },
+  { project:"MNOP De-addiction Centre", id:"PRJ-2026-00778", scheme:"De-addiction & Rehabilitation", allocated:1500000, utilized:430000 },
+  { project:"GPRSA Vocational Institute", id:"PRJ-2026-00842", scheme:"Health & Rehab", allocated:800000, utilized:812000 },
+  { project:"KKD Skill Development NGO", id:"PRJ-2026-00760", scheme:"Vocational Training", allocated:1100000, utilized:702000 },
+  { project:"XYZ Women's Skill Centre", id:"PRJ-2026-00699", scheme:"Skill Development for Women", allocated:900000, utilized:610000 }
+];
+function fmtInr(n){ return "₹" + Math.round(n).toLocaleString('en-IN'); }
+function utilizationStatus(pct){
+  if(pct > 100) return { tone:"red", label:"Overspend risk" };
+  if(pct < 40) return { tone:"amber", label:"Underutilized" };
+  return { tone:"green", label:"On track" };
+}
+
+/* ---- Fund Overutilization Reports (submitted by NGO users) ---- */
+const NGO_FUND_PROJECT_ID = "PRJ-2026-00842"; // project tied to the logged-in NGO user in this demo
+let fundReports = [
+  { project:"ABRF Old Age Home", id:"PRJ-2026-00795", allocated:950000, utilized:1015000, pct:107,
+    reason:"Winter season required additional heating, bedding, and medical supplies for residents beyond what was budgeted. District coordinator was verbally informed; formal supplementary grant request has been filed separately.",
+    submittedBy:"S. Kalaivani", status:"Pending" }
+];
+let pendingFundReportGrantIndex = null;
+let pendingFundReportReviewIndex = null;
+
+/* ---- Evidence & Documents (uploaded by NGOs) ---- */
+let evidenceDocs = [
+  { name:"Utilization_Certificate_2026.pdf", type:"Utilization Certificate", project:"GGG Skill Centre", id:"PRJ-2026-00811", by:"Ramesh S.", at:"9 Sep 2026", status:"Verified",
+    remarks:"Figures reconcile with the fund utilization ledger. No issues found.", decidedBy:"Admin Master", decidedAt:"9 Sep 2026" },
+  { name:"Beneficiary_List.xlsx", type:"Beneficiary List", project:"MNOP De-addiction Centre", id:"PRJ-2026-00778", by:"R. Meena", at:"3 Sep 2026", status:"Pending" },
+  { name:"Site_Photos_Main.jpg", type:"Site Photographs", project:"ABRF Old Age Home", id:"PRJ-2026-00795", by:"S. Kalaivani", at:"6 Sep 2026", status:"Verified",
+    remarks:"Photos match the registered site address and timestamp metadata.", decidedBy:"Admin Master", decidedAt:"6 Sep 2026" },
+  { name:"Audited_Statement.pdf", type:"Audited Financial Statement", project:"GPRSA Vocational Institute", id:"PRJ-2026-00842", by:"T. Ganesan", at:"29 Aug 2026", status:"Rejected",
+    remarks:"Statement is unsigned by the chartered accountant. Please resubmit a signed and stamped copy.", decidedBy:"Admin Master", decidedAt:"30 Aug 2026" },
+  { name:"Attendance_Register.xlsx", type:"Attendance Register", project:"KKD Skill Development NGO", id:"PRJ-2026-00760", by:"N. Priya", at:"28 Aug 2026", status:"Pending" },
+  { name:"Registration_Certificate.pdf", type:"Registration Certificate", project:"XYZ Women's Skill Centre", id:"PRJ-2026-00699", by:"K. Suresh", at:"25 Aug 2026", status:"Pending" }
+];
+let pendingEvidenceIndex = null;
+
+/* ---- Completed inspections + feedback ---- */
+let completedInspections = [
+  { project:"XYZ Women's Skill Centre", id:"PRJ-2026-00699", inspector:"Divya N.", date:"8 Sep 2026", rating:4.3, report:"Submitted",
+    review:"Facility well maintained, attendance registers matched camera counts. Trainers present on schedule. No concerns raised." },
+  { project:"GGG Skill Centre", id:"PRJ-2026-00811", inspector:"Arvind R.", date:"5 Sep 2026", rating:4.8, report:"Submitted",
+    review:"Excellent turnout and infrastructure. Beneficiaries confirmed receipt of stipends. Recommend as a model site for peer visits." },
+  { project:"ABRF Old Age Home", id:"PRJ-2026-00795", inspector:"Meena K.", date:"2 Sep 2026", rating:3.6, report:"Flagged",
+    review:"Headcount on-site (14) was noticeably lower than the register (19) with no satisfactory explanation from staff. Two residents reported delayed meal service. Recommend a follow-up unannounced visit within 2 weeks." },
+  { project:"KKD Skill Development NGO", id:"PRJ-2026-00760", inspector:"Karthik V.", date:"22 Aug 2026", rating:4.1, report:"Submitted",
+    review:"Good compliance overall. Minor observation: one classroom lacked adequate lighting, flagged to the NGO for correction, not safety-critical." }
+];
+
+let users = [
+  { name:"Ramesh S.", email:"ramesh.s@ngo.org", role:"User / NGO", org:"GGG Welfare Trust", status:"Active" },
+  { name:"Arvind R.", email:"arvind.r@pmu.gov.in", role:"Inspector", org:"PMU Field Team 4", status:"Active" },
+  { name:"Meena K.", email:"meena.k@pmu.gov.in", role:"Inspector", org:"PMU Field Team 1", status:"Active" },
+  { name:"S. Kalaivani", email:"kalaivani@abrf.org", role:"User / NGO", org:"ABRF Charitable Society", status:"Active" },
+  { name:"Admin Master", email:"admin@dosje.gov.in", role:"Administrator", org:"DoSJE Central HQ", status:"Active" }
+];
+let pendingUserIndex = null;
+
+/* ---- Inspector: assigned inspections + reschedule requests ---- */
+let inspectorAssignments = [
+  { project:"GGG Skill Centre", district:"Chennai", visitDate:"18 Sep 2026", status:"Scheduled" },
+  { project:"Navjyoti Elder Care", district:"Vellore", visitDate:"17 Sep 2026", status:"Scheduled" },
+  { project:"KKD Skill Development NGO", district:"Tiruchirappalli", visitDate:"20 Sep 2026", status:"Scheduled" }
+];
+
+let rescheduleRequests = [
+  { project:"ABRF Old Age Home", inspector:"Meena K.", currentDate:"16 Sep 2026", reason:"Road access blocked due to local flooding; requesting a 2-day extension.", status:"Pending" }
+];
+let pendingRescheduleReqIndex = null;
+let pendingRescheduleAssignIndex = null;
+
+let auditLogs = [
+  { time:"15 Sep 2026, 11:15 AM", actor:"Arvind R.", role:"Inspector", action:"Submitted CCTV headcount audit report", target:"PRJ-2026-00811" },
+  { time:"15 Sep 2026, 10:42 AM", actor:"Ramesh S.", role:"NGO User", action:"Uploaded document: Utilization_Certificate.pdf", target:"PRJ-2026-00811" },
+  { time:"14 Sep 2026, 4:30 PM", actor:"Admin Master", role:"Admin", action:"Approved project extension request", target:"PRJ-2026-00795" }
+];
+
+function pushLog(actor, role, action, target){
+  const now = new Date();
+  const time = now.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) + ", " +
+               now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  auditLogs.unshift({ time, actor, role, action, target });
+}
+
+function initAdminData(){
+  autoSendStuckAttendanceAlerts();
+  renderDashboard();
+  updateNavCounts();
+}
+
+function autoSendStuckAttendanceAlerts(){
+  cctvSites.filter(s => s.stuckDays && !s.alertSent).forEach(s=>{
+    s.alertSent = true;
+    pushLog("System", "System", `Auto-sent attendance alert email for stuck site (${s.stuckDays}d unchanged)`, s.name);
+  });
+}
+
+function updateNavCounts(){
+  const pendingCount = assignmentQueue.filter(a => !a.inspector && a.status !== "Completed").length;
+  const anomalyCount = anomalies.filter(a => a.status === "open").length;
+  const evidenceCount = evidenceDocs.filter(d => d.status === "Pending").length;
+  const pc = document.getElementById('nav-pending-count');
+  const ac = document.getElementById('nav-anomaly-count');
+  const ec = document.getElementById('nav-evidence-count');
+  if(pc) pc.textContent = pendingCount;
+  if(ac) ac.textContent = anomalyCount;
+  if(ec) ec.textContent = evidenceCount;
+  document.getElementById('alert-count').textContent = anomalyCount + evidenceCount;
+}
+
+/* =================================================================
+   DASHBOARD
+================================================================= */
+function statusTone(s){
+  if(s === "Completed") return "green";
+  if(s === "Offline Camera") return "red";
+  if(s === "Scheduled") return "teal";
+  return "amber"; // Pending Field Audit
+}
+
+function renderDashboard(){
+  const pending = assignmentQueue.filter(a => a.status !== "Completed").length;
+  const offline = cctvSites.filter(s => !s.live).length;
+  document.getElementById('kpi-pending').textContent = pending;
+  document.getElementById('kpi-offline').textContent = offline;
+
+  renderDashboardCharts();
+  renderRescheduleRequests();
+
+  const rows = assignmentQueue.slice(0,5);
+  document.getElementById('dash-queue-table').innerHTML = rows.map(r=>`
+    <tr>
+      <td class="muted">${r.id}</td>
+      <td><b>${r.name}</b></td>
+      <td class="muted">${r.district}</td>
+      <td><span class="badge ${statusTone(r.status)}">${r.status}</span></td>
+      <td class="muted">${r.inspector || "Unassigned"}</td>
+    </tr>`).join("");
+
+  document.getElementById('dash-activity').innerHTML = auditLogs.slice(0,5).map(l=>`
+    <div style="display:flex; gap:12px; padding:11px 0; border-bottom:1px solid var(--line);">
+      <div style="font-size:11.5px; color:var(--ink-45); width:150px; flex-shrink:0;">${l.time}</div>
+      <div style="font-size:12.5px;"><b>${l.actor}</b> (${l.role}) — ${l.action} <span style="color:var(--ink-45);">· ${l.target}</span></div>
+    </div>`).join("");
+
+  updateNavCounts();
+}
+
+function renderDashboardCharts(){
+  /* Project status breakdown — vertical bar chart */
+  const statusOrder = ["Pending Field Audit", "Offline Camera", "Scheduled", "Completed"];
+  const statusColor = { "Pending Field Audit":"var(--amber)", "Offline Camera":"var(--red)", "Scheduled":"var(--teal)", "Completed":"var(--green)" };
+  const counts = statusOrder.map(s => assignmentQueue.filter(a=>a.status===s).length);
+  const max = Math.max(...counts, 1);
+  const chartEl = document.getElementById('dash-status-chart');
+  if(chartEl){
+    chartEl.innerHTML = statusOrder.map((s,idx)=>{
+      const h = Math.max(Math.round(counts[idx]/max*100), counts[idx]>0 ? 8 : 2);
+      return `
+        <div class="bcol">
+          <div style="font-size:12px; font-weight:800;">${counts[idx]}</div>
+          <div class="bwrap" style="height:130px;"><div class="bseg" style="height:${h}%; background:${statusColor[s]};"></div></div>
+          <div class="blabel">${s}</div>
+        </div>`;
+    }).join("");
+  }
+
+  /* District compliance snapshot — stacked bar + legend */
+  const bands = [
+    { label:"On track (≥85%)", tone:"green", color:"var(--green)", count: districts.filter(d=>d.pct>=85).length },
+    { label:"Watch (65–84%)", tone:"amber", color:"var(--amber)", count: districts.filter(d=>d.pct>=65 && d.pct<85).length },
+    { label:"At risk (<65%)", tone:"red", color:"var(--red)", count: districts.filter(d=>d.pct<65).length }
+  ];
+  const totalDist = districts.length || 1;
+  const donutEl = document.getElementById('dash-compliance-donut');
+  if(donutEl){
+    donutEl.innerHTML = `<div style="display:flex; height:22px; border-radius:6px; overflow:hidden; margin-top:6px;">
+      ${bands.map(b=> b.count>0 ? `<div style="width:${b.count/totalDist*100}%; background:${b.color};"></div>` : "").join("")}
+    </div>`;
+  }
+  const legendEl = document.getElementById('dash-compliance-legend');
+  if(legendEl){
+    legendEl.innerHTML = bands.map(b=>`
+      <div class="li"><span class="sw" style="background:${b.color};"></span>${b.label}<span class="num">${b.count}</span></div>`).join("");
+  }
+}
+
+/* =================================================================
+   LIVE SURVEILLANCE (CCTV + AI headcount)
+================================================================= */
+function deviationInfo(headCount, expected){
+  const pct = Math.round((Math.abs(headCount - expected) / expected) * 100);
+  let tone = "green", note = "Within tolerance";
+  if(pct > 15){ tone = "red"; note = "Flagged anomaly"; }
+  else if(pct > 5){ tone = "amber"; note = "Under review"; }
+  return { pct, tone, note };
+}
+
+function renderCctv(){
+  const online = cctvSites.filter(s=>s.live);
+  const offline = cctvSites.filter(s=>!s.live);
+  document.getElementById('cctv-kpi-online').textContent = online.length;
+  document.getElementById('cctv-kpi-total').textContent = cctvSites.length;
+  document.getElementById('cctv-kpi-pending-report').textContent = offline.length;
+
+  let flagged = 0, review = 0;
+  online.forEach(s=>{
+    const d = deviationInfo(s.headCount, s.expected);
+    if(d.tone === "red") flagged++;
+    else if(d.tone === "amber") review++;
+  });
+  document.getElementById('cctv-kpi-flagged').textContent = flagged;
+  document.getElementById('cctv-kpi-review').textContent = review;
+
+  const statusF = document.getElementById('cctv-status-filter').value;
+  const q = document.getElementById('cctv-search').value.trim().toLowerCase();
+
+  const rows = cctvSites.filter(s=>{
+    if(q && !s.name.toLowerCase().includes(q) && !s.district.toLowerCase().includes(q)) return false;
+    if(statusF === "all") return true;
+    if(statusF === "offline") return !s.live;
+    if(!s.live) return false;
+    const d = deviationInfo(s.headCount, s.expected);
+    if(statusF === "live") return d.tone === "green";
+    if(statusF === "review") return d.tone === "amber";
+    if(statusF === "flagged") return d.tone === "red";
+    return true;
+  });
+
+  const grid = document.getElementById('cctv-grid');
+  if(rows.length === 0){
+    grid.innerHTML = `<div class="placeholder" style="grid-column:1/-1;">No feeds match your filters.</div>`;
+    return;
+  }
+
+  grid.innerHTML = rows.map(s=>{
+    if(!s.live){
+      return `
+        <div class="feed-tile offline">
+          <div class="glow"></div>
+          <div class="tag"><span class="pulse"></span>OFFLINE</div>
+          <div class="info"><div class="name">${s.name}</div><div class="loc">${s.district}</div></div>
+        </div>`;
+    }
+    const d = deviationInfo(s.headCount, s.expected);
+    return `
+      <div class="feed-tile">
+        <div class="glow"></div>
+        <div class="tag"><span class="pulse"></span>LIVE</div>
+        <div class="ai-chip dev-${d.tone}">${s.headCount}/${s.expected} · ${d.pct}%</div>
+        <div class="info"><div class="name">${s.name}</div><div class="loc">${s.district}</div></div>
+      </div>`;
+  }).join("");
+}
+
+/* =================================================================
+   INSPECTION ASSIGNMENTS
+================================================================= */
+function populateDistrictFilter(){
+  const sel = document.getElementById('aq-district-filter');
+  if(sel.options.length > 1) return;
+  [...new Set(assignmentQueue.map(a=>a.district))].sort().forEach(d=>{
+    const opt = document.createElement('option');
+    opt.value = d; opt.textContent = d;
+    sel.appendChild(opt);
+  });
+}
+
+function renderAssignments(){
+  populateDistrictFilter();
+  const statusF = document.getElementById('aq-status-filter').value;
+  const distF = document.getElementById('aq-district-filter').value;
+  const q = document.getElementById('aq-search').value.trim().toLowerCase();
+
+  const rows = assignmentQueue.filter(a=>{
+    if(statusF !== "all" && a.status !== statusF) return false;
+    if(distF !== "all" && a.district !== distF) return false;
+    if(q && !a.name.toLowerCase().includes(q) && !a.id.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  const tbody = document.getElementById('assignments-table');
+  if(rows.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--ink-45); padding:30px;">No projects match your filters.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = rows.map(r=>{
+    return `
+      <tr class="${r._flash ? 'row-flash' : ''}">
+        <td class="muted">${r.id}</td>
+        <td><b>${r.name}</b></td>
+        <td class="muted">${r.district}</td>
+        <td><span class="badge ${statusTone(r.status)}">${r.status}</span></td>
+        <td class="muted">${r.inspector || "Unassigned — pending auto-allocation"}</td>
+      </tr>`;
+  }).join("");
+  assignmentQueue.forEach(a=> a._flash = false);
+}
+
+function openCreateProjectModal(){
+  document.getElementById('cp-name').value = "";
+  document.getElementById('cp-district').value = "";
+  document.getElementById('cp-org').value = "";
+  document.getElementById('create-project-modal').classList.add('show');
+}
+
+function createProject(){
+  const name = document.getElementById('cp-name').value.trim();
+  const district = document.getElementById('cp-district').value.trim();
+  const org = document.getElementById('cp-org').value.trim();
+
+  if(!name || !district || !org){
+    showToast("Missing details", "Project name, district and organisation are required.", "purple");
+    return;
+  }
+
+  const id = "PRJ-2026-" + String(Math.floor(10000 + Math.random()*89999)).slice(0,5);
+  assignmentQueue.unshift({ id, name, district, status:"Pending Field Audit", inspector:null, org, _flash:true });
+  pushLog("Admin Master", "Admin", `Created new project ${name} (${org}) for`, id);
+  showToast("Project created", `${name} has been added to the queue for auto-assignment.`, "purple");
+  closeModal('create-project-modal');
+  renderAssignments();
+  renderDashboard();
+}
+
+function runRandomAssignment(){
+  const targets = assignmentQueue.filter(a => !a.inspector && a.status !== "Completed");
+  if(targets.length === 0){
+    showToast("Nothing to assign", "Every open project already has an inspector.", "purple");
+    return;
+  }
+  targets.forEach(a=>{
+    const choice = inspectorRoster[Math.floor(Math.random()*inspectorRoster.length)];
+    a.inspector = choice;
+    a.status = "Scheduled";
+    a._flash = true;
+    pushLog("Admin Master", "Admin", `Randomly assigned inspector ${choice} to`, a.id);
+  });
+  showToast("Random assignment complete", `${targets.length} project${targets.length>1?'s':''} allocated across the inspector roster.`, "purple");
+  renderAssignments();
+  renderDashboard();
+}
+
+/* =================================================================
+   INSPECTIONS OVERVIEW (completed inspections + feedback)
+================================================================= */
+function renderInspectionsOverview(){
+  document.getElementById('insp-kpi-completed').textContent = completedInspections.length;
+  const avg = completedInspections.reduce((s,i)=>s+i.rating,0) / completedInspections.length;
+  document.getElementById('insp-kpi-rating').textContent = avg.toFixed(1) + " ★";
+  document.getElementById('insp-kpi-flagged').textContent = completedInspections.filter(i=>i.report==="Flagged").length;
+
+  document.getElementById('inspections-table').innerHTML = completedInspections.map((i,idx)=>`
+    <tr>
+      <td><b>${i.project}</b></td>
+      <td class="muted">${i.id}</td>
+      <td class="muted">${i.inspector}</td>
+      <td class="muted">${i.date}</td>
+      <td>★ ${i.rating.toFixed(1)}</td>
+      <td><span class="badge ${i.report==='Flagged'?'red':'green'}">${i.report}</span></td>
+      <td><button class="btn small ghost" onclick="openReviewModal(${idx})">View review →</button></td>
+    </tr>`).join("");
+}
+
+function openReviewModal(i){
+  const insp = completedInspections[i];
+  document.getElementById('review-modal-sub').textContent = `${insp.project} · ${insp.inspector} · ${insp.date} · ★ ${insp.rating.toFixed(1)}`;
+  document.getElementById('review-modal-body').textContent = insp.review || "No written review submitted.";
+  document.getElementById('review-modal').classList.add('show');
+}
+
+/* =================================================================
+   INSPECTOR: ASSIGNED INSPECTIONS + RESCHEDULE REQUESTS
+================================================================= */
+function renderInspectorAssigned(){
+  document.getElementById('inspector-assigned-table').innerHTML = inspectorAssignments.map((a,i)=>`
+    <tr>
+      <td><b>${a.project}</b></td>
+      <td class="muted">${a.district}</td>
+      <td class="muted">${a.visitDate}</td>
+      <td><span class="badge ${a.status==='Reschedule requested'?'amber':'teal'}">${a.status}</span></td>
+      <td>${a.status==='Reschedule requested'
+            ? `<span class="muted">Awaiting admin decision</span>`
+            : `<button class="btn small ghost" onclick="openRescheduleModal(${i})">Request reschedule</button>`}</td>
+    </tr>`).join("");
+}
+
+function openRescheduleModal(i){
+  pendingRescheduleAssignIndex = i;
+  const a = inspectorAssignments[i];
+  document.getElementById('reschedule-modal-sub').textContent = `${a.project} · currently scheduled ${a.visitDate}`;
+  document.getElementById('reschedule-reason').value = "";
+  document.getElementById('reschedule-modal').classList.add('show');
+}
+
+function submitRescheduleRequest(){
+  const a = inspectorAssignments[pendingRescheduleAssignIndex];
+  const reason = document.getElementById('reschedule-reason').value.trim();
+  if(!reason){
+    showToast("Reason required", "Please add a reason for the reschedule request.", "purple");
+    return;
+  }
+  a.status = "Reschedule requested";
+  rescheduleRequests.unshift({ project:a.project, inspector:userProfiles.inspector.name, currentDate:a.visitDate, reason, status:"Pending" });
+  pushLog(userProfiles.inspector.name, "Inspector", "Requested a reschedule for", a.project);
+  showToast("Request sent", `Your reschedule request for ${a.project} has been sent to the admin.`, "purple");
+  closeModal('reschedule-modal');
+  renderInspectorAssigned();
+}
+
+function renderRescheduleRequests(){
+  const el = document.getElementById('dash-reschedule');
+  if(!el) return;
+  const pending = rescheduleRequests.filter(r=>r.status === "Pending");
+  document.getElementById('reschedule-kpi-count').textContent = pending.length;
+  if(pending.length === 0){
+    el.innerHTML = `<p style="font-size:12.5px; color:var(--ink-45); padding:6px 0;">No pending reschedule requests.</p>`;
+    return;
+  }
+  el.innerHTML = pending.map(r=>{
+    const i = rescheduleRequests.indexOf(r);
+    return `
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 0; border-bottom:1px solid var(--line);">
+        <div>
+          <div style="font-size:12.5px; font-weight:700;">${r.project}</div>
+          <div style="font-size:11.5px; color:var(--ink-45);">${r.inspector} · currently ${r.currentDate}</div>
+        </div>
+        <button class="btn small purple" onclick="openRescheduleDecisionModal(${i})">Review →</button>
+      </div>`;
+  }).join("");
+}
+
+function openRescheduleDecisionModal(i){
+  pendingRescheduleReqIndex = i;
+  const r = rescheduleRequests[i];
+  document.getElementById('reschedule-decision-sub').textContent = `${r.project} · ${r.inspector} · currently scheduled ${r.currentDate}`;
+  document.getElementById('reschedule-decision-reason').innerHTML = `<div class="rb-head">Reason given</div>${r.reason}`;
+  document.getElementById('reschedule-decision-modal').classList.add('show');
+}
+
+function resolveReschedule(decision){
+  const r = rescheduleRequests[pendingRescheduleReqIndex];
+  r.status = decision;
+  const assignment = inspectorAssignments.find(a=>a.project === r.project);
+  if(assignment) assignment.status = decision === "Approved" ? "Scheduled" : "Scheduled";
+  pushLog("Admin Master", "Admin", `${decision} reschedule request for`, r.project);
+  showToast(decision === "Approved" ? "Reschedule approved" : "Reschedule denied",
+    `${r.project}'s request has been ${decision.toLowerCase()}.`, "purple");
+  closeModal('reschedule-decision-modal');
+  renderRescheduleRequests();
+}
+
+/* =================================================================
+   FUND UTILIZATION
+================================================================= */
+function renderFunds(){
+  const totalAllocated = grants.reduce((s,g)=>s+g.allocated,0);
+  const totalUtilized = grants.reduce((s,g)=>s+g.utilized,0);
+  const overallPct = Math.round(totalUtilized/totalAllocated*100);
+  const flagged = grants.filter(g => {
+    const pct = g.utilized/g.allocated*100;
+    return utilizationStatus(pct).tone !== "green";
+  }).length;
+
+  document.getElementById('fund-kpi-allocated').textContent = fmtInr(totalAllocated);
+  document.getElementById('fund-kpi-utilized').textContent = fmtInr(totalUtilized);
+  document.getElementById('fund-kpi-utilized-note').textContent = overallPct + "% of total allocation";
+  document.getElementById('fund-kpi-balance').textContent = fmtInr(totalAllocated - totalUtilized);
+  document.getElementById('fund-kpi-flagged').textContent = flagged;
+
+  const maxAlloc = Math.max(...grants.map(g=>g.allocated), 1);
+  document.getElementById('fund-bar-chart').innerHTML = grants.map(g=>{
+    const allocPct = Math.max(Math.round(g.allocated/maxAlloc*100), 4);
+    const utilPct = Math.max(Math.round(g.utilized/maxAlloc*100), 1);
+    const pct = Math.round(g.utilized/g.allocated*100);
+    const st = utilizationStatus(pct);
+    return `
+      <div style="margin-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:7px;">
+          <span><b>${g.project}</b></span>
+          <span style="color:var(--ink-45);">${fmtInr(g.utilized)} of ${fmtInr(g.allocated)} · <span style="color:var(--${st.tone});">${pct}%</span></span>
+        </div>
+        <div style="height:10px; border-radius:5px; background:var(--accent-soft); border:1px solid var(--accent); width:${allocPct}%; margin-bottom:4px;"></div>
+        <div style="height:10px; border-radius:5px; background:var(--teal); width:${utilPct}%;"></div>
+      </div>`;
+  }).join("");
+
+  document.getElementById('funds-table').innerHTML = grants.map((g,i)=>{
+    const pct = Math.round(g.utilized/g.allocated*100);
+    const st = utilizationStatus(pct);
+    const report = fundReports.find(r=>r.id === g.id);
+    let action = '<span class="muted">—</span>';
+    if(pct > 100){
+      if(report){
+        const reportIdx = fundReports.indexOf(report);
+        const reportTone = report.status === "Pending" ? "amber" : (report.status === "Escalated" ? "red" : "green");
+        action = `<button class="badge ${reportTone}" style="border:none; cursor:pointer;" onclick="openFundReportReviewModal(${reportIdx})">View report: ${report.status}</button>`;
+      } else {
+        action = `<span class="muted" style="font-size:11.5px;">No report submitted yet</span>`;
+      }
+    }
+    return `
+      <tr>
+        <td><b>${g.project}</b></td>
+        <td class="muted">${g.scheme}</td>
+        <td class="muted">${fmtInr(g.allocated)}</td>
+        <td class="muted">${fmtInr(g.utilized)}</td>
+        <td class="muted">${fmtInr(g.allocated-g.utilized)}</td>
+        <td class="muted">${pct}%</td>
+        <td><span class="badge ${st.tone}">${st.label}</span></td>
+        <td>${action}</td>
+      </tr>`;
+  }).join("");
+
+  renderFundReportsAdmin();
+}
+
+function submitFundReport(){
+  const g = grants[pendingFundReportGrantIndex];
+  const pct = Math.round(g.utilized/g.allocated*100);
+  const reason = document.getElementById('fund-report-reason').value.trim();
+  if(!reason){
+    showToast("Reason required", "Please explain why the fund was overutilized.", "purple");
+    return;
+  }
+  const submittedBy = userProfiles[currentRole] ? userProfiles[currentRole].name : "Admin Master";
+  fundReports.unshift({ project:g.project, id:g.id, allocated:g.allocated, utilized:g.utilized, pct, reason, submittedBy, status:"Pending" });
+  pushLog(submittedBy, currentRole === 'user' ? "NGO User" : "Admin", "Submitted a fund overutilization report for", g.project);
+  showToast("Report submitted", `The overutilization report for ${g.project} has been logged.`, "teal");
+  closeModal('fund-report-modal');
+  renderFunds();
+  renderUserFunds();
+}
+
+function renderFundReportsAdmin(){
+  const el = document.getElementById('fund-reports-list');
+  if(!el) return;
+  const pending = fundReports.filter(r=>r.status === "Pending");
+  document.getElementById('fund-report-kpi-count').textContent = pending.length;
+  if(fundReports.length === 0){
+    el.innerHTML = `<p style="font-size:12.5px; color:var(--ink-45); padding:6px 0;">No overutilization reports submitted yet.</p>`;
+    return;
+  }
+  el.innerHTML = fundReports.map((r,i)=>{
+    const tone = r.status === "Pending" ? "amber" : (r.status === "Escalated" ? "red" : "green");
+    const action = r.status === "Pending"
+      ? `<button class="btn small red-outline" onclick="openFundReportReviewModal(${i})">Review →</button>`
+      : `<button class="btn small ghost" onclick="openFundReportReviewModal(${i})">View report →</button>`;
+    return `
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 0; border-bottom:1px solid var(--line);">
+        <div>
+          <div style="font-size:12.5px; font-weight:700;">${r.project}</div>
+          <div style="font-size:11.5px; color:var(--ink-45);">${fmtInr(r.utilized)} of ${fmtInr(r.allocated)} · ${r.pct}% · by ${r.submittedBy}</div>
+        </div>
+        ${action}
+      </div>`;
+  }).join("");
+}
+
+function openFundReportReviewModal(i){
+  pendingFundReportReviewIndex = i;
+  const r = fundReports[i];
+  const tone = r.status === "Pending" ? "amber" : (r.status === "Escalated" ? "red" : "green");
+
+  document.getElementById('fund-report-decision-sub').textContent = `${r.project} · ${fmtInr(r.utilized)} of ${fmtInr(r.allocated)} · ${r.pct}%`;
+  document.getElementById('fund-report-decision-reason').textContent = r.reason;
+  document.getElementById('fund-report-decision-meta').textContent = `Submitted by ${r.submittedBy}`;
+
+  const statusEl = document.getElementById('fund-report-decision-status');
+  statusEl.textContent = r.status;
+  statusEl.className = "badge " + tone;
+
+  const isPending = r.status === "Pending" && currentRole === 'admin';
+  document.getElementById('fund-report-decision-escalate').style.display = isPending ? "" : "none";
+  document.getElementById('fund-report-decision-acknowledge').style.display = isPending ? "" : "none";
+
+  document.getElementById('fund-report-decision-modal').classList.add('show');
+}
+
+function resolveFundReport(decision){
+  const r = fundReports[pendingFundReportReviewIndex];
+  r.status = decision;
+  pushLog("Admin Master", "Admin", `${decision} the fund overutilization report for`, r.project);
+  showToast(decision === "Acknowledged" ? "Report acknowledged" : "Report escalated",
+    `${r.project}'s overutilization report has been ${decision.toLowerCase()}.`, decision === "Acknowledged" ? "teal" : "purple");
+  closeModal('fund-report-decision-modal');
+  renderFunds();
+  renderUserFunds();
+}
+
+/* ---- NGO Portal: My Project Funds ---- */
+function renderUserFunds(){
+  const nameEl = document.getElementById('ngo-fund-project-name');
+  if(!nameEl) return;
+  const g = grants.find(x=>x.id === NGO_FUND_PROJECT_ID);
+  if(!g) return;
+  const pct = Math.round(g.utilized/g.allocated*100);
+  const st = utilizationStatus(pct);
+
+  document.getElementById('ngo-fund-allocated').textContent = fmtInr(g.allocated);
+  document.getElementById('ngo-fund-utilized').textContent = fmtInr(g.utilized);
+  document.getElementById('ngo-fund-utilized-note').textContent = pct + "% of allocation";
+  document.getElementById('ngo-fund-balance').textContent = fmtInr(g.allocated - g.utilized);
+  document.getElementById('ngo-fund-status').textContent = st.label;
+  document.getElementById('ngo-fund-status-note').textContent = pct > 100 ? "Over budget" : "Within budget";
+  document.getElementById('ngo-fund-project-name').textContent = g.project;
+  document.getElementById('ngo-fund-project-id').textContent = g.scheme + " · " + g.id;
+
+  const allocPct = 100;
+  const utilPct = Math.min(Math.round(g.utilized/g.allocated*100), 100);
+  document.getElementById('ngo-fund-bar').innerHTML = `
+    <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:7px;">
+      <span><b>${g.project}</b></span>
+      <span style="color:var(--ink-45);">${fmtInr(g.utilized)} of ${fmtInr(g.allocated)} · <span style="color:var(--${st.tone});">${pct}%</span></span>
+    </div>
+    <div style="height:10px; border-radius:5px; background:var(--accent-soft); border:1px solid var(--accent); width:${allocPct}%; margin-bottom:4px;"></div>
+    <div style="height:10px; border-radius:5px; background:var(--teal); width:${utilPct}%;"></div>`;
+
+  const notice = document.getElementById('ngo-fund-overspend-notice');
+  const report = fundReports.find(r=>r.id === g.id);
+  if(pct <= 100){
+    notice.innerHTML = "";
+  } else if(report){
+    const tone = report.status === "Pending" ? "amber" : (report.status === "Escalated" ? "red" : "green");
+    const reportIdx = fundReports.indexOf(report);
+    notice.innerHTML = `
+      <div style="margin-top:6px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <div style="font-size:12.5px; color:var(--ink-45);">Your overutilization report has been submitted.</div>
+        <button class="badge ${tone}" style="border:none; cursor:pointer;" onclick="openFundReportReviewModal(${reportIdx})">View report: ${report.status}</button>
+      </div>`;
+  } else {
+    notice.innerHTML = `
+      <div style="margin-top:6px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <div style="font-size:12.5px; color:var(--red);">This project has exceeded its allocated funds. Please submit a report explaining the overutilization.</div>
+        <button class="btn small red-outline" onclick="openNgoFundReportModal()">Report overutilization</button>
+      </div>`;
+  }
+}
+
+function openNgoFundReportModal(){
+  const g = grants.find(x=>x.id === NGO_FUND_PROJECT_ID);
+  const gi = grants.findIndex(x=>x.id === NGO_FUND_PROJECT_ID);
+  pendingFundReportGrantIndex = gi;
+  const pct = Math.round(g.utilized/g.allocated*100);
+  document.getElementById('fund-report-modal-sub').textContent = `${g.project} · ${fmtInr(g.utilized)} of ${fmtInr(g.allocated)} · ${pct}%`;
+  document.getElementById('fund-report-reason').value = "";
+  document.getElementById('fund-report-modal').classList.add('show');
+}
+
+/* =================================================================
+   ATTENDANCE ANALYSIS (derived from live CCTV headcount data)
+================================================================= */
+function attendanceStatus(pct){
+  if(pct >= 90) return { tone:"green", label:"Good" };
+  if(pct >= 75) return { tone:"amber", label:"Monitor" };
+  return { tone:"red", label:"Flagged" };
+}
+
+function populateAttendanceDistrictFilter(){
+  const sel = document.getElementById('att-district-filter');
+  if(sel.options.length > 1) return;
+  [...new Set(cctvSites.map(s=>s.district))].sort().forEach(d=>{
+    const opt = document.createElement('option');
+    opt.value = d; opt.textContent = d;
+    sel.appendChild(opt);
+  });
+}
+
+function renderAttendance(){
+  populateAttendanceDistrictFilter();
+  const liveSites = cctvSites.filter(s=>s.live);
+  const offlineSites = cctvSites.filter(s=>!s.live);
+  const pctList = liveSites.map(s => s.headCount/s.expected*100);
+  const avg = pctList.reduce((a,b)=>a+b,0) / (pctList.length || 1);
+
+  document.getElementById('att-kpi-avg').textContent = Math.round(avg) + "%";
+  document.getElementById('att-kpi-flagged').textContent = pctList.filter(p=>p<75).length;
+  document.getElementById('att-kpi-total').textContent = liveSites.reduce((s,x)=>s+x.expected,0);
+  document.getElementById('att-kpi-nodata').textContent = offlineSites.length;
+
+  const districtF = document.getElementById('att-district-filter').value;
+  const viewF = document.getElementById('att-view-filter').value;
+  const q = document.getElementById('att-search').value.trim().toLowerCase();
+
+  let filteredLive = liveSites.filter(s=>{
+    if(districtF !== "all" && s.district !== districtF) return false;
+    if(q && !s.name.toLowerCase().includes(q) && !s.district.toLowerCase().includes(q)) return false;
+    const pct = s.headCount/s.expected*100;
+    if(viewF === "low" && pct >= 75) return false;
+    if(viewF === "stuck" && !s.stuckDays) return false;
+    return true;
+  });
+
+  // Lowest attendance first, so at-risk sites surface at the top
+  filteredLive = filteredLive.sort((a,b)=>(a.headCount/a.expected) - (b.headCount/b.expected));
+
+  const rows = filteredLive.map(s=>{
+    const pct = Math.round(s.headCount/s.expected*100);
+    const st = attendanceStatus(pct);
+    const stuckChip = s.stuckDays ? `<span class="chip-stuck">Stuck ${s.stuckDays}d</span>` : "";
+    const emailedChip = s.alertSent ? `<span class="chip-emailed">Email sent</span>` : "";
+    const action = s.stuckDays
+      ? `<button class="btn small ${s.alertSent ? 'ghost' : 'red-outline'}" onclick="sendAttendanceAlert('${s.name.replace(/'/g,"\\'")}')">${s.alertSent ? "Resend alert email" : "Send alert email"}</button>`
+      : `<span class="muted">—</span>`;
+    return `
+      <tr>
+        <td><b>${s.name}</b>${stuckChip}${emailedChip}</td>
+        <td class="muted">${s.district}</td>
+        <td class="muted">${s.expected}</td>
+        <td class="muted">${s.headCount}</td>
+        <td class="muted">${pct}%</td>
+        <td><span class="badge ${st.tone}">${st.label}</span></td>
+        <td>${action}</td>
+      </tr>`;
+  }).join("");
+
+  let offlineRows = "";
+  if(viewF === "all" || viewF === "low"){
+    const filteredOffline = offlineSites.filter(s=>{
+      if(districtF !== "all" && s.district !== districtF) return false;
+      if(q && !s.name.toLowerCase().includes(q) && !s.district.toLowerCase().includes(q)) return false;
+      return true;
+    });
+    offlineRows = filteredOffline.map(s=>`
+      <tr>
+        <td><b>${s.name}</b></td>
+        <td class="muted">${s.district}</td>
+        <td class="muted">—</td>
+        <td class="muted">—</td>
+        <td class="muted">—</td>
+        <td><span class="badge grey">No data — camera offline</span></td>
+        <td class="muted">—</td>
+      </tr>`).join("");
+  }
+
+  const combined = rows + offlineRows;
+  document.getElementById('attendance-table').innerHTML = combined || `<tr><td colspan="7" style="text-align:center; color:var(--ink-45); padding:30px;">No sites match your filters.</td></tr>`;
+}
+
+function sendAttendanceAlert(siteName){
+  const s = cctvSites.find(x=>x.name === siteName);
+  if(!s) return;
+  s.alertSent = true;
+  pushLog("Admin Master", "Admin", `Sent attendance alert email for stuck site`, s.name);
+  showToast("Alert email sent", `An attendance alert has been emailed for ${s.name} (stuck ${s.stuckDays} days).`, "purple");
+  renderAttendance();
+}
+
+/* =================================================================
+   EVIDENCE & DOCUMENTS
+================================================================= */
+function renderEvidence(){
+  const statusF = document.getElementById('ev-status-filter').value;
+  const q = document.getElementById('ev-search').value.trim().toLowerCase();
+
+  document.getElementById('ev-kpi-total').textContent = evidenceDocs.length;
+  document.getElementById('ev-kpi-pending').textContent = evidenceDocs.filter(d=>d.status==="Pending").length;
+  document.getElementById('ev-kpi-verified').textContent = evidenceDocs.filter(d=>d.status==="Verified").length;
+  document.getElementById('ev-kpi-rejected').textContent = evidenceDocs.filter(d=>d.status==="Rejected").length;
+
+  const rows = evidenceDocs.filter(d=>{
+    if(statusF !== "all" && d.status !== statusF) return false;
+    if(q && !d.project.toLowerCase().includes(q) && !d.name.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  const tbody = document.getElementById('evidence-table');
+  if(rows.length === 0){
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--ink-45); padding:30px;">No documents match your filters.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.map(d=>{
+    const i = evidenceDocs.indexOf(d);
+    return `
+      <tr class="${d._flash ? 'row-flash' : ''}">
+        <td><b>${d.name}</b></td>
+        <td class="muted">${d.type}</td>
+        <td class="muted">${d.project}</td>
+        <td class="muted">${d.by}</td>
+        <td class="muted">${d.at}</td>
+        <td><span class="badge ${d.status==='Verified'?'green':d.status==='Rejected'?'red':'amber'}">${d.status}</span></td>
+        <td>${d.status === "Pending"
+              ? `<button class="btn small teal" onclick="openEvidenceModal(${i})">Review →</button>`
+              : `<button class="btn small ghost" onclick="viewEvidenceDecision(${i})">View decision →</button>`}</td>
+      </tr>`;
+  }).join("");
+  evidenceDocs.forEach(d=> d._flash = false);
+  updateNavCounts();
+}
+
+function openEvidenceModal(i){
+  pendingEvidenceIndex = i;
+  const d = evidenceDocs[i];
+  document.getElementById('evidence-modal-sub').textContent = `${d.name} · ${d.type} · ${d.project} (${d.id}) · uploaded by ${d.by} on ${d.at}`;
+  document.getElementById('evidence-remarks').value = "";
+  document.getElementById('evidence-modal').classList.add('show');
+}
+
+function resolveEvidence(decision){
+  const d = evidenceDocs[pendingEvidenceIndex];
+  d.status = decision;
+  d.remarks = document.getElementById('evidence-remarks').value.trim() || "No remarks entered.";
+  d.decidedBy = "Admin Master";
+  d.decidedAt = new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  d._flash = true;
+  closeModal('evidence-modal');
+  pushLog("Admin Master", "Admin", `${decision} document ${d.name} for`, d.id);
+  showToast(decision === "Verified" ? "Document verified" : "Document rejected",
+    `${d.name} has been marked ${decision.toLowerCase()}.`, "purple");
+  renderEvidence();
+  renderDashboard();
+}
+
+function viewEvidenceDecision(i){
+  const d = evidenceDocs[i];
+  document.getElementById('evidence-view-sub').textContent = `${d.name} · ${d.project} · decided ${d.decidedAt || "—"} by ${d.decidedBy || "—"}`;
+  document.getElementById('evidence-view-body').textContent = d.remarks || "No remarks were recorded for this decision.";
+  document.getElementById('evidence-view-modal').classList.add('show');
+}
+
+/* =================================================================
+   CREATE NEW LOGIN
+================================================================= */
+function generateTempPassword(){
+  const chars = "ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
+  let pass = "";
+  for(let i=0;i<10;i++) pass += chars[Math.floor(Math.random()*chars.length)];
+  return pass;
+}
+
+function resetNewUserForm(){
+  document.getElementById('nu-name').value = "";
+  document.getElementById('nu-email').value = "";
+  document.getElementById('nu-role').value = "User / NGO";
+  document.getElementById('nu-org').value = "";
+  document.getElementById('nu-district').value = "";
+  document.getElementById('nu-success').classList.add('hidden');
+}
+
+function createNewLogin(){
+  const name = document.getElementById('nu-name').value.trim();
+  const email = document.getElementById('nu-email').value.trim();
+  const role = document.getElementById('nu-role').value;
+  const org = document.getElementById('nu-org').value.trim();
+
+  if(!name || !email || !org){
+    showToast("Missing details", "Name, email and organisation are required.", "purple");
+    return;
+  }
+  if(users.some(u=>u.email.toLowerCase() === email.toLowerCase())){
+    showToast("Login already exists", `${email} already has an account on this portal.`, "purple");
+    return;
+  }
+
+  const tempPassword = generateTempPassword();
+  users.unshift({ name, email, role, org, status:"Active", _flash:true });
+  pushLog("Admin Master", "Admin", `Created new ${role} login for ${name}`, email);
+
+  document.getElementById('nu-out-email').textContent = email;
+  document.getElementById('nu-out-password').textContent = tempPassword;
+  document.getElementById('nu-success').classList.remove('hidden');
+
+  showToast("Login created", `Credentials generated for ${name} (${role}).`, "purple");
+  renderDashboard();
+}
+
+/* =================================================================
+   ANOMALY ANALYTICS
+================================================================= */
+function renderAnomalies(){
+  document.getElementById('an-kpi-open').textContent = anomalies.filter(a=>a.status==="open").length;
+  document.getElementById('an-kpi-escalated').textContent = anomalies.filter(a=>a.status==="escalated").length;
+  document.getElementById('an-kpi-ack').textContent = anomalies.filter(a=>a.status==="acknowledged").length;
+
+  document.getElementById('anomaly-list').innerHTML = anomalies.map((a,i)=>{
+    const linkedInspIdx = completedInspections.findIndex(ins => ins.id === a.project && ins.report === "Flagged");
+    return `
+    <div class="anomaly ${a.sev}">
+      <div class="sev"></div>
+      <div class="a-body">
+        <div class="a-top"><div class="a-title">${a.title}</div><div class="a-time">${a.time}</div></div>
+        <div class="a-note">${a.note}</div>
+        <div style="margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <span class="badge ${a.sev==='high'?'red':a.sev==='med'?'amber':'teal'}">${a.sev==='high'?'High':a.sev==='med'?'Medium':'Low'} severity</span>
+          <span class="badge ${a.status==='open'?'red':a.status==='escalated'?'amber':'green'}">${a.status==='open'?'Open':a.status==='escalated'?'Escalated':'Acknowledged'}</span>
+        </div>
+        <div class="a-actions">
+          ${linkedInspIdx > -1 ? `<button class="btn small ghost" onclick="openReviewModal(${linkedInspIdx})">View inspector review →</button>` : ""}
+          ${a.status === "open" ? `<button class="btn small teal" onclick="openAnomalyModal(${i})">Review case →</button>` : ""}
+        </div>
+      </div>
+    </div>`;}).join("");
+
+  updateNavCounts();
+}
+
+function openAnomalyModal(i){
+  pendingAnomalyIndex = i;
+  const a = anomalies[i];
+  document.getElementById('anomaly-modal-sub').textContent = `${a.title} · ${a.project}`;
+  document.getElementById('anomaly-remarks').value = "";
+  document.getElementById('anomaly-modal').classList.add('show');
+}
+
+function resolveAnomaly(decision){
+  const a = anomalies[pendingAnomalyIndex];
+  a.status = decision;
+  closeModal('anomaly-modal');
+  pushLog("Admin Master", "Admin", `${decision === "escalated" ? "Escalated" : "Acknowledged"} anomaly on`, a.project);
+  showToast(decision === "escalated" ? "Case escalated" : "Case acknowledged",
+    `${a.title} marked as ${decision}.`, "purple");
+  renderAnomalies();
+  renderDashboard();
+}
+
+/* =================================================================
+   DISTRICT COMPLIANCE
+================================================================= */
+function renderCompliance(){
+  document.getElementById('dist-list').innerHTML = districts.map(d=>{
+    const cls = d.pct >= 85 ? '' : d.pct >= 65 ? 'warn' : 'risk';
+    return `
+      <div class="dist-row">
+        <div class="dist-top"><span>${d.name}</span><span class="n">${d.pct}%</span></div>
+        <div class="bar-track"><div class="bar-fill ${cls}" style="width:${d.pct}%;"></div></div>
+      </div>`;
+  }).join("");
+
+  const onTrack = districts.filter(d=>d.pct>=85).length;
+  const watch = districts.filter(d=>d.pct>=65 && d.pct<85).length;
+  const risk = districts.filter(d=>d.pct<65).length;
+  const avg = Math.round(districts.reduce((s,d)=>s+d.pct,0) / (districts.length||1));
+
+  document.getElementById('dist-stats').innerHTML = `
+    <div class="kpi"><div class="label">Districts on track</div><div class="value">${onTrack}</div><div class="note green">≥ 85% compliance</div></div>
+    <div class="kpi"><div class="label">Districts to watch</div><div class="value">${watch}</div><div class="note amber">65–84% compliance</div></div>
+    <div class="kpi"><div class="label">Districts at risk</div><div class="value">${risk}</div><div class="note red">Below 65% compliance</div></div>
+    <div class="kpi"><div class="label">Average compliance</div><div class="value">${avg}%</div><div class="note">Across ${districts.length} districts</div></div>`;
+}
+
+/* =================================================================
+   USER & ROLE MANAGEMENT
+================================================================= */
+function roleTone(r){
+  if(r === "Administrator") return "red";
+  if(r === "Inspector") return "purple";
+  return "teal";
+}
+
+function renderUsers(){
+  const roleF = document.getElementById('u-role-filter').value;
+  const q = document.getElementById('u-search').value.trim().toLowerCase();
+
+  const rows = users.filter(u=>{
+    if(roleF !== "all" && u.role !== roleF) return false;
+    if(q && !u.name.toLowerCase().includes(q) && !u.email.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  const tbody = document.getElementById('users-table');
+  if(rows.length === 0){
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--ink-45); padding:30px;">No users match your filters.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = rows.map(u=>{
+    const i = users.indexOf(u);
+    return `
+      <tr class="${u._flash ? 'row-flash' : ''}">
+        <td><b>${u.name}</b></td>
+        <td class="muted">${u.email}</td>
+        <td><span class="badge ${roleTone(u.role)}">${u.role}</span></td>
+        <td class="muted">${u.org}</td>
+        <td><span class="badge ${u.status==='Active'?'green':'grey'}">${u.status}</span></td>
+        <td><button class="btn small ghost" onclick="openUserModal(${i})">Edit Access</button></td>
+      </tr>`;
+  }).join("");
+  users.forEach(u=> u._flash = false);
+}
+
+function openUserModal(i){
+  pendingUserIndex = i;
+  const isEdit = i !== null;
+  document.getElementById('user-modal-title').textContent = isEdit ? "Edit User Access" : "Add User";
+  const u = isEdit ? users[i] : { name:"", email:"", role:"User / NGO", org:"", status:"Active" };
+  document.getElementById('um-name').value = u.name;
+  document.getElementById('um-email').value = u.email;
+  document.getElementById('um-role').value = u.role;
+  document.getElementById('um-status').value = u.status;
+  document.getElementById('um-org').value = u.org;
+  document.getElementById('user-modal').classList.add('show');
+}
+
+function saveUser(){
+  const name = document.getElementById('um-name').value.trim();
+  const email = document.getElementById('um-email').value.trim();
+  const role = document.getElementById('um-role').value;
+  const status = document.getElementById('um-status').value;
+  const org = document.getElementById('um-org').value.trim();
+
+  if(!name || !email){
+    showToast("Missing details", "Name and email are required.", "purple");
+    return;
+  }
+
+  if(pendingUserIndex === null){
+    users.unshift({ name, email, role, org, status, _flash:true });
+    pushLog("Admin Master", "Admin", `Created new ${role} account for ${name}`, email);
+    showToast("User added", `${name} now has ${role} access.`, "purple");
+  } else {
+    const u = users[pendingUserIndex];
+    u.name = name; u.email = email; u.role = role; u.org = org; u.status = status; u._flash = true;
+    pushLog("Admin Master", "Admin", `Updated access for ${name} to ${role} (${status})`, email);
+    showToast("User updated", `${name}'s access has been updated.`, "purple");
+  }
+  closeModal('user-modal');
+  renderUsers();
+}
+
+/* =================================================================
+   AUDIT LOGS
+================================================================= */
+function logCategory(action){
+  const a = action.toLowerCase();
+  if(a.includes("created new project")) return "project";
+  if(a.includes("assigned inspector") || a.includes("randomly assigned")) return "assignment";
+  if(a.includes("document") || a.includes("verified") || a.includes("rejected")) return "evidence";
+  if(a.includes("anomaly")) return "anomaly";
+  if(a.includes("attendance alert")) return "attendance";
+  if(a.includes("reschedule")) return "reschedule";
+  if(a.includes("login") || a.includes("account") || a.includes("access")) return "user";
+  return "other";
+}
+
+function roleTone2(role){
+  if(role === "Admin") return "red";
+  if(role === "Inspector") return "purple";
+  if(role === "System") return "grey";
+  return "teal"; // NGO User
+}
+
+function renderLogs(){
+  const roleF = document.getElementById('log-role-filter').value;
+  const catF = document.getElementById('log-category-filter').value;
+  const q = document.getElementById('log-search').value.trim().toLowerCase();
+
+  const rows = auditLogs.filter(l=>{
+    if(roleF !== "all" && l.role !== roleF) return false;
+    if(catF !== "all" && logCategory(l.action) !== catF) return false;
+    if(q && !l.actor.toLowerCase().includes(q) && !l.action.toLowerCase().includes(q) && !l.target.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  const tbody = document.getElementById('logs-table');
+  if(rows.length === 0){
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--ink-45); padding:30px;">No log entries match your filters.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.map(l=>`
+    <tr>
+      <td class="muted">${l.time}</td>
+      <td><b>${l.actor}</b></td>
+      <td><span class="badge ${roleTone2(l.role)}">${l.role}</span></td>
+      <td>${l.action}</td>
+      <td class="muted">${l.target}</td>
+    </tr>`).join("");
+}
+
+/* =================================================================
+   MEMBER 4 MONITORING ENGINE — FastAPI integration
+================================================================= */
+const MEMBER4_API = "http://127.0.0.1:8000";
+
+function m4Out(obj){
+  const el=document.getElementById("m4-output");
+  if(el) el.textContent=typeof obj==="string"?obj:JSON.stringify(obj,null,2);
+}
+async function m4Fetch(url, options={}){
+  const r=await fetch(MEMBER4_API+url, options);
+  const data=await r.json().catch(()=>({detail:r.statusText}));
+  if(!r.ok) throw new Error(data.detail || "API request failed");
+  return data;
+}
+function m4Project(){ return document.getElementById("m4-project").value; }
+
+async function m4Refresh(){
+  const d=new Date(); const dateEl=document.getElementById("m4-date");
+  if(dateEl && !dateEl.value) dateEl.value=d.toISOString().slice(0,10);
+  try{
+    const [inspections, anomalies, risk] = await Promise.all([
+      m4Fetch("/inspections?project_id="+encodeURIComponent(m4Project())),
+      m4Fetch("/anomalies/"+encodeURIComponent(m4Project())),
+      m4Fetch("/risk/"+encodeURIComponent(m4Project()))
+    ]);
+    document.getElementById("m4-insp-count").textContent=inspections.length;
+    document.getElementById("m4-anomaly-count").textContent=anomalies.filter(a=>a.status==="OPEN").length;
+    document.getElementById("m4-risk-score").textContent=risk.overall_score;
+    document.getElementById("m4-risk-band").textContent=risk.risk_level;
+    document.getElementById("m4-surprise").textContent=risk.surprise_inspection_recommended?"YES":"NO";
+    document.getElementById("m4-surprise-box").textContent=risk.surprise_inspection_recommended
+      ? "SURPRISE_INSPECTION_RECOMMENDED — at least one HIGH severity open anomaly exists."
+      : "No HIGH severity open anomaly is currently triggering a surprise inspection.";
+    document.getElementById("m4-risk-components").innerHTML=Object.entries(risk.components).map(([k,v])=>{
+      const max={attendance:25,occupancy:20,financial:20,inspection:15,evidence:10,anomalies:10}[k];
+      const pct=(v/max)*100;
+      return `<div class="dist-row"><div class="dist-top"><span>${k}</span><span class="n">${v}/${max}</span></div><div class="bar-track"><div class="bar-fill ${pct>=70?'risk':pct>=40?'warn':''}" style="width:${pct}%"></div></div></div>`;
+    }).join("");
+    document.getElementById("m4-inspection-table").innerHTML=inspections.map(i=>`<tr>
+      <td><b>${i.id}</b></td><td>${i.project_id}</td><td>${i.inspector_id}</td><td>${i.date}</td>
+      <td><span class="badge ${i.status==='COMPLETED'?'green':i.status==='CANCELLED'?'red':'amber'}">${i.status}</span></td>
+      <td class="muted">${i.remarks||"—"}</td></tr>`).join("") || `<tr><td colspan="6" style="text-align:center;padding:25px;">No inspections yet.</td></tr>`;
+    m4Out({risk, anomalies});
+  }catch(e){ m4Out({error:e.message, hint:"Start FastAPI on port 8000 and initialize the database."}); }
+}
+
+async function m4RunDetection(){
+  const payload={
+    project_id:m4Project(),
+    expected_attendance:Number(document.getElementById("m4-expected").value),
+    actual_attendance:Number(document.getElementById("m4-actual").value),
+    capacity:Number(document.getElementById("m4-capacity").value),
+    people_detected:Number(document.getElementById("m4-people").value),
+    fund_utilization:Number(document.getElementById("m4-fund").value),
+    physical_progress:Number(document.getElementById("m4-progress").value),
+    financial_threshold:Number(document.getElementById("m4-fthreshold").value),
+    attendance_threshold:Number(document.getElementById("m4-athreshold").value),
+    inspection_status:document.getElementById("m4-insp-status").value,
+    inspection_date:document.getElementById("m4-date").value || new Date().toISOString().slice(0,10),
+    inspection_completed:document.getElementById("m4-insp-status").value==="COMPLETED",
+    required_evidence_count:Number(document.getElementById("m4-required").value),
+    total_evidence_count:Number(document.getElementById("m4-total-evidence").value),
+    verified_evidence_count:Number(document.getElementById("m4-verified").value),
+    repeated_issue_count:Number(document.getElementById("m4-repeated").value)
+  };
+  try{
+    const data=await m4Fetch("/anomalies/detect",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    m4Out(data); await m4Refresh();
+  }catch(e){m4Out({error:e.message});}
+}
+async function m4LoadRisk(){
+  try{const d=await m4Fetch("/risk/"+encodeURIComponent(m4Project()));m4Out(d);await m4Refresh();}
+  catch(e){m4Out({error:e.message});}
+}
+async function m4CreateInspection(){
+  const payload={
+    project_id:m4Project(),
+    inspector_id:document.getElementById("m4-inspector").value,
+    date:document.getElementById("m4-date").value || new Date().toISOString().slice(0,10),
+    status:document.getElementById("m4-insp-status").value,
+    remarks:document.getElementById("m4-remarks").value,
+    checklist:[
+      {item:"Site accessible",checked:true},
+      {item:"Attendance register checked",checked:true},
+      {item:"Safety measures checked",checked:false,note:"Review required"}
+    ]
+  };
+  try{
+    const d=await m4Fetch("/inspections",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    m4Out(d);await m4Refresh();
+  }catch(e){m4Out({error:e.message});}
+}
+async function m4OpenReport(){
+  try{const d=await m4Fetch("/reports/"+encodeURIComponent(m4Project()));m4Out(d);}
+  catch(e){m4Out({error:e.message});}
+}
+function m4DownloadCSV(){
+  window.open(MEMBER4_API+"/reports/"+encodeURIComponent(m4Project())+"?format=csv","_blank");
+}
+
+</script>
+
+
+</body></html>

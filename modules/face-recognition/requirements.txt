@@ -1,0 +1,5 @@
+numpy>=1.23,<2.0
+opencv-python>=4.8
+onnxruntime>=1.16
+insightface==0.7.3
+# GPU (optional): replace onnxruntime with onnxruntime-gpu and edit ONNX_PROVIDERS / CTX_ID in config.py

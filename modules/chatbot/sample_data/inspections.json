@@ -1,0 +1,50 @@
+[
+  {
+    "inspection_id": "INS-001",
+    "project_id": "PRJ-001",
+    "inspector_name": "Arvind R.",
+    "status": "COMPLETED",
+    "scheduled_date": "2026-08-27T09:00:00+00:00",
+    "notes": "Site records, beneficiary attendance and evidence verified."
+  },
+  {
+    "inspection_id": "INS-002",
+    "project_id": "PRJ-002",
+    "inspector_name": "Meena K.",
+    "status": "PENDING",
+    "scheduled_date": "2026-09-22T10:00:00+00:00",
+    "notes": "Attendance discrepancy requires supporting explanation."
+  },
+  {
+    "inspection_id": "INS-003",
+    "project_id": "PRJ-003",
+    "inspector_name": "Karthik S.",
+    "status": "PENDING",
+    "scheduled_date": null,
+    "notes": "Inspection scheduled."
+  },
+  {
+    "inspection_id": "INS-004",
+    "project_id": "PRJ-004",
+    "inspector_name": "Arvind R.",
+    "status": "PENDING",
+    "scheduled_date": null,
+    "notes": "Pending field inspection."
+  },
+  {
+    "inspection_id": "INS-005",
+    "project_id": "PRJ-005",
+    "inspector_name": "Meena K.",
+    "status": "PENDING",
+    "scheduled_date": null,
+    "notes": "High-risk project requires priority inspection."
+  },
+  {
+    "inspection_id": "INS-006",
+    "project_id": "PRJ-001",
+    "inspector_name": "Arvind R.",
+    "status": "COMPLETED",
+    "scheduled_date": "2026-09-16T09:00:00+00:00",
+    "notes": "Compliance evidence verified."
+  }
+]
